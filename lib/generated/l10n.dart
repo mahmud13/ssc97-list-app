@@ -50,11 +50,11 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `What's your name`
-  String get Hello {
+  /// `Tadrib`
+  String get tadrib {
     return Intl.message(
-      'What\'s your name',
-      name: 'Hello',
+      'Tadrib',
+      name: 'tadrib',
       desc: '',
       args: [],
     );

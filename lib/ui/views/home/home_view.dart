@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mgcs_app/ui/views/home/home_view_model.dart';
 import 'package:stacked/stacked.dart';
 import 'package:mgcs_app/generated/l10n.dart';
-import 'package:mgcs_app/ui/views/splash_screen/splash_screen_view_model.dart';
 
-class SplashScreenView extends StatelessWidget {
-  const SplashScreenView({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget {
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var s = S.of(context);
-    return ViewModelBuilder<SplashScreenViewModel>.reactive(
+    return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
           body: SafeArea(
@@ -19,21 +19,17 @@ class SplashScreenView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    s.tadrib,
+                    'Home',
                     style: TextStyle(fontSize: 93, color: theme.primaryColor),
                   ),
-                  Image.asset(
-                    'assets/images/splash.png',
-                    width: 122,
-                  )
+                 
                 ],
               ),
             ),
           ),
         );
       },
-      viewModelBuilder: () => SplashScreenViewModel(),
-      onModelReady: (model) => model.onModelReady(),
+      viewModelBuilder: () => HomeViewModel(),
     );
   }
 }
