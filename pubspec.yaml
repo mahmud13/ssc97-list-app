@@ -40,6 +40,8 @@ dependencies:
   intl: ^0.17.0
   localstorage: ^4.0.0+1
   im_stepper: ^1.0.1+1
+  flutter_native_splash: ^2.2.7
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +67,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/icons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
@@ -91,3 +94,9 @@ flutter:
 flutter_intl:
   enabled: true
   main_locale: en
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21

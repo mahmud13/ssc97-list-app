@@ -12,14 +12,14 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../ui/views/home/home_view.dart';
 import '../ui/views/intro/intro_view.dart';
-import '../ui/views/splash_screen/splash_screen_view.dart';
+import '../ui/views/startup/startup_view.dart';
 
 class Routes {
-  static const String splashScreenView = '/';
+  static const String startupView = '/';
   static const String introView = '/intro';
   static const String homeView = '/home';
   static const all = <String>{
-    splashScreenView,
+    startupView,
     introView,
     homeView,
   };
@@ -29,16 +29,16 @@ class StackedRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.splashScreenView, page: SplashScreenView),
+    RouteDef(Routes.startupView, page: StartupView),
     RouteDef(Routes.introView, page: IntroView),
     RouteDef(Routes.homeView, page: HomeView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
-    SplashScreenView: (data) {
+    StartupView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const SplashScreenView(),
+        builder: (context) => const StartupView(),
         settings: data,
       );
     },
@@ -62,7 +62,7 @@ class StackedRouter extends RouterBase {
 /// *************************************************************************
 
 extension NavigatorStateExtension on NavigationService {
-  Future<dynamic> navigateToSplashScreenView({
+  Future<dynamic> navigateToStartupView({
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -70,7 +70,7 @@ extension NavigatorStateExtension on NavigationService {
         transition,
   }) async {
     return navigateTo(
-      Routes.splashScreenView,
+      Routes.startupView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

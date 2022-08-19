@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:mgcs_app/app/app.locator.dart';
 import 'package:mgcs_app/app/app.router.dart';
@@ -7,12 +8,12 @@ import 'package:stacked/stacked.dart';
 import 'package:mgcs_app/app/app.logger.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class SplashScreenViewModel extends BaseViewModel {
-  final log = getLogger('SplashScreenViewModel');
+class StartupViewModel extends BaseViewModel {
+  final log = getLogger('StartupViewModel');
   final _navigationService = locator<NavigationService>();
   final LocalStorage storage = LocalStorage('mgcs_app');
 
-  SplashScreenViewModel() {
+  StartupViewModel() {
     log.i('initiated');
   }
 
@@ -22,6 +23,9 @@ class SplashScreenViewModel extends BaseViewModel {
   }
 
   void redirectToNext() {
+    log.v('removing splash');
+    FlutterNativeSplash.remove();
+
     log.v('Checking if first time user');
 
     if (storage.getItem('introShown') == true) {
