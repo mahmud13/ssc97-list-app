@@ -41,13 +41,15 @@ class AuthenticationService with ReactiveServiceMixin {
       Response response = await dio.post(
         '/login',
         data: {
+          "grant_type": "firebase",
           "client_id": 1,
-          "client_secret": "",
+          "client_secret": "6hLBjXTbyIGicLLxyEjHdUjlx7NgF6jIlCBacHyO",
           "firebase_token": firebaseToken,
           "firebase_uid": firebaseUid,
         },
       );
-
+      log.v("login Response");
+      log.v(response.data);
       LoginResponse data = LoginResponse.fromJson(response.data);
       _token.value = data.accessToken;
       setToken(data.accessToken);
@@ -83,11 +85,6 @@ class AuthenticationService with ReactiveServiceMixin {
   /// @return void
   Future logout() async {
     try {
-      await dio.get(
-        '/api/auth/logout',
-        options: authorizationHeader,
-      );
-
       deleteToken();
       _user.value = null;
     } on DioError catch (e) {

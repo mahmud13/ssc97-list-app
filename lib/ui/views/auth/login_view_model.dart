@@ -1,3 +1,4 @@
+import 'package:flutterfire_ui/auth.dart';
 import 'package:mgcs_app/app/app.locator.dart';
 import 'package:mgcs_app/app/app.logger.dart';
 import 'package:mgcs_app/app/app.router.dart';
@@ -11,6 +12,10 @@ class LoginViewModel extends BaseViewModel {
   LoginViewModel() {
     log.i('initiated');
   }
+  void login(SignedIn state) async {
+    log.v(state);
+  }
+
   void navigateToHome() {
     log.v('navigating to home');
     _navigationService.navigateTo(Routes.homeView);

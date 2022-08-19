@@ -3,6 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:mgcs_app/generated/l10n.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'app/app.locator.dart';
 import 'app/app.router.dart';
@@ -10,6 +12,9 @@ import 'app/app.router.dart';
 Future main() async {
   var widgetBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetBinding);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   setupLocator();
   runApp(const MyApp());
 }
@@ -41,9 +46,9 @@ class MyApp extends StatelessWidget {
   RouteSettings _guardedSettings(RouteSettings settings) {
     final path = settings.name;
     const signedIn = false;
-
+    print(path);
     // if you want a path to always be allowed place before your route guards
-    if (path == Routes.introView) return settings;
+    if (path == Routes.introView || path == Routes.startupView) return settings;
 
     // auth route guard implementation
     if (!signedIn && path != Routes.loginView) {

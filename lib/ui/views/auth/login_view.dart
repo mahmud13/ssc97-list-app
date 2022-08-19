@@ -15,7 +15,7 @@ class LoginView extends StatelessWidget {
         providerConfigs: providerConfigs,
         actions: [
           AuthStateChangeAction<SignedIn>((context, state) {
-            model.navigateToHome();
+            model.login(state);
           }),
         ],
       ),
