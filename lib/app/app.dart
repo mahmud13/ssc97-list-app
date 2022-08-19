@@ -1,3 +1,4 @@
+import 'package:mgcs_app/ui/views/auth/login_view.dart';
 import 'package:mgcs_app/ui/views/home/home_view.dart';
 import 'package:mgcs_app/ui/views/intro/intro_view.dart';
 import 'package:mgcs_app/ui/views/startup/startup_view.dart';
@@ -9,6 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: StartupView, path: '/', initial: true),
     MaterialRoute(page: IntroView, path: '/intro'),
     MaterialRoute(page: HomeView, path: '/home'),
+    MaterialRoute(page: LoginView, path: '/login'),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

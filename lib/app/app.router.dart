@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../ui/views/auth/login_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/intro/intro_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -18,10 +19,12 @@ class Routes {
   static const String startupView = '/';
   static const String introView = '/intro';
   static const String homeView = '/home';
+  static const String loginView = '/login';
   static const all = <String>{
     startupView,
     introView,
     homeView,
+    loginView,
   };
 }
 
@@ -32,6 +35,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.startupView, page: StartupView),
     RouteDef(Routes.introView, page: IntroView),
     RouteDef(Routes.homeView, page: HomeView),
+    RouteDef(Routes.loginView, page: LoginView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -51,6 +55,12 @@ class StackedRouter extends RouterBase {
     HomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const HomeView(),
+        settings: data,
+      );
+    },
+    LoginView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginView(),
         settings: data,
       );
     },
@@ -103,6 +113,22 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.homeView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToLoginView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.loginView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

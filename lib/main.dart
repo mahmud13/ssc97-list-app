@@ -33,6 +33,24 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         navigatorKey: StackedService.navigatorKey,
-        onGenerateRoute: StackedRouter().onGenerateRoute,
+        onGenerateRoute: (settings) => StackedRouter().onGenerateRoute(
+          _guardedSettings(settings),
+        ),
       );
+
+  RouteSettings _guardedSettings(RouteSettings settings) {
+    final path = settings.name;
+    const signedIn = false;
+
+    // if you want a path to always be allowed place before your route guards
+    if (path == Routes.introView) return settings;
+
+    // auth route guard implementation
+    if (!signedIn && path != Routes.loginView) {
+      return const RouteSettings(name: Routes.loginView);
+    }
+
+    // no route guards violated, return the settings for the desired route
+    return settings;
+  }
 }
