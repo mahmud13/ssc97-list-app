@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mgcs.app.mgcs_app">
    <application
-        android:label="mgcs_app"
+        android:label="MGCS"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

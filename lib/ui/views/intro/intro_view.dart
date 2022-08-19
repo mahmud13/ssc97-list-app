@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:mgcs_app/ui/views/intro/intro_view_model.dart';
 import 'package:stacked/stacked.dart';
@@ -16,53 +15,53 @@ class IntroView extends StatelessWidget {
     var s = S.of(context);
     return ViewModelBuilder<IntroViewModel>.reactive(
       builder: (context, model, child) {
-        return WillPopScope(
-          onWillPop: () async {
-            SystemNavigator.pop();
-            return true;
-          },
-          child: Scaffold(
-            body: SafeArea(
+        return Scaffold(
+          body: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onHorizontalDragEnd: (details) {
+              int sensitivity = 8;
+              if (details.primaryVelocity != null &&
+                  details.primaryVelocity! > sensitivity) {
+                model.goPrev();
+              } else if (details.primaryVelocity != null &&
+                  details.primaryVelocity! < -sensitivity) {
+                model.goNext();
+              }
+            },
+            child: SafeArea(
               child: Column(
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.close_outlined,
-                        color: theme.primaryColor,
-                        size: 32,
+                      child: IconButton(
+                        onPressed: model.navigateToLogin,
+                        icon: Icon(
+                          Icons.close_outlined,
+                          color: theme.primaryColor,
+                          size: 32,
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onPanEnd: (details) {
-                        int sensitivity = 8;
-                        if (details.primaryVelocity != null &&
-                            details.primaryVelocity! > sensitivity) {
-                          model.goPrev();
-                        } else if (details.primaryVelocity != null &&
-                            details.primaryVelocity! < -sensitivity) {
-                          model.goNext();
-                        }
-                      },
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: activeWidget(model.activeStep),
-                      ),
-                    ),
+                    child: activeWidget(model.activeStep),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 32.0),
                     child: DotStepper(
+                      indicatorDecoration: IndicatorDecoration(
+                          color: theme.primaryColor, strokeWidth: 3),
                       activeStep: model.activeStep,
                       dotCount: model.totalSteps,
                       dotRadius: 9,
                       spacing: 10,
                       shape: Shape.circle,
                       indicator: Indicator.shift,
+                      onDotTapped: ((tappedDotIndex) {
+                        model.activeStep = tappedDotIndex;
+                      }),
                     ),
                   ),
                   // Row(

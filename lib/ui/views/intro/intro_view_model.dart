@@ -37,5 +37,7 @@ class IntroViewModel extends BaseViewModel {
     }
   }
 
-
+  void navigateToLogin() {
+    _navigationService.navigateTo(Routes.homeView);
+  }
 }
