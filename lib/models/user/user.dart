@@ -3,15 +3,15 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-@JsonSerializable(fieldRename: FieldRename.snake)
 class User with _$User {
   User._();
 
+  @JsonSerializable(fieldRename: FieldRename.snake)
   factory User({
-    required String id,
+    required int id,
     String? email,
     required String name,
-    required String phone,
+    String? phone,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

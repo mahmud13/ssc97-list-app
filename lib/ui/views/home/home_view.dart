@@ -15,16 +15,18 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           body: SafeArea(
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Home',
-                    style: TextStyle(fontSize: 93, color: theme.primaryColor),
-                  ),
-                 
-                ],
-              ),
+              child: model.user == null
+                  ? const CircularProgressIndicator()
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Hello, ${model.user!.name}",
+                          style: TextStyle(
+                              fontSize: 93, color: theme.primaryColor),
+                        ),
+                      ],
+                    ),
             ),
           ),
         );

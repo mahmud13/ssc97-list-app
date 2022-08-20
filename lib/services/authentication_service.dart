@@ -1,15 +1,14 @@
-import 'package:localstorage/localstorage.dart';
 import 'package:mgcs_app/app/app.logger.dart';
 import 'package:mgcs_app/app/http_client.dart';
+import 'package:mgcs_app/app/localstorage.dart';
+import 'package:mgcs_app/models/api_helpers/api_wrapper.dart';
 import 'package:mgcs_app/models/auth/login_response.dart';
 import 'package:mgcs_app/models/user/user.dart';
-import 'package:observable_ish/observable_ish.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dio/dio.dart';
 
 class AuthenticationService with ReactiveServiceMixin {
   final log = getLogger('AuthenticationService');
-  final _localStorage = LocalStorage('mgcs_app');
   final dio = getDio();
 
   AuthenticationService() {
@@ -17,15 +16,30 @@ class AuthenticationService with ReactiveServiceMixin {
   }
 
   /// @return [String] token
-  final RxValue<String> _token = RxValue<String>("");
+  final ReactiveValue<String> _token = ReactiveValue<String>("");
   String get token => _token.value;
   bool get loggedIn => _token.value.isNotEmpty ? true : false;
 
   /// @return [User] user
-  final RxValue<User?> _user = RxValue<User?>(null);
+  final ReactiveValue<User?> _user = ReactiveValue<User?>(null);
   User? get user => _user.value;
 
   static const authTokenKey = 'auth.token';
+
+  Future initializeAuth() async {
+    try {
+      var localstorage = await getLocalStorage();
+      var token = localstorage.getString(AuthenticationService.authTokenKey);
+      if (token != null) {
+        setToken(token);
+        await fetchUser();
+      }
+
+      log.i('Logged in');
+    } on DioError catch (e) {
+      handleError(e);
+    }
+  }
 
   /// Login with email and password.
   ///
@@ -48,8 +62,8 @@ class AuthenticationService with ReactiveServiceMixin {
           "firebase_uid": firebaseUid,
         },
       );
-      log.v("login Response");
-      log.v(response.data);
+      log.i("login Response");
+      log.i(response.data);
       LoginResponse data = LoginResponse.fromJson(response.data);
       _token.value = data.accessToken;
       setToken(data.accessToken);
@@ -72,9 +86,10 @@ class AuthenticationService with ReactiveServiceMixin {
         '/me',
         options: authorizationHeader,
       );
-
-      User data = User.fromJson(response.data);
-      _user.value = data;
+      var result = ApiResult.fromResponse(response, User.fromJson);
+      if (result is Success<User>) {
+        _user.value = result.data;
+      }
     } on DioError catch (e) {
       handleError(e);
     }
@@ -110,18 +125,18 @@ class AuthenticationService with ReactiveServiceMixin {
   /// @param string [token]
   /// @return void
   void setToken(String token) async {
-    var localStorage = LocalStorage('mgcs_app');
     _token.value = token;
-    localStorage.setItem(authTokenKey, token);
+    var localstorage = await getLocalStorage();
+    localstorage.setString(authTokenKey, token);
   }
 
   /// Destroy the auth token from state and in [SharedPreferences]
   ///
   /// @return void
   void deleteToken() async {
-    var localStorage = LocalStorage('mgcs_app');
     _token.value = "";
-    localStorage.deleteItem(authTokenKey);
+    var localstorage = await getLocalStorage();
+    localstorage.remove(authTokenKey);
   }
 
   /// A callback function receiving [DioError] as first parameter
@@ -132,25 +147,26 @@ class AuthenticationService with ReactiveServiceMixin {
     if (error.response == null) {
       return;
     }
+    log.e(error.response);
     switch (error.response!.statusCode) {
       case 403:
-        print("You do not have the right privileges to access this resource.");
+        log.e("You do not have the right privileges to access this resource.");
         break;
       case 422:
-        print("The data you have provided is invalid.");
+        log.e("The data you have provided is invalid.");
         break;
       case 401:
-        print("Incorrect credentials.");
+        log.e("Incorrect credentials.");
         break;
       case 404:
-        print("Request not found.");
+        log.e("Request not found.");
         break;
       case 500:
-        print(
+        log.e(
             "There is something wrong with our servers, please report to the admin so it gets fixed.");
         break;
       default:
-        print("Something went wrong.");
+        log.e("Something went wrong.");
     }
   }
 }

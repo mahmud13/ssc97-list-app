@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:mgcs_app/app/localstorage.dart';
 import 'package:mgcs_app/services/authentication_service.dart';
 
 Dio getDio() {
@@ -14,9 +14,9 @@ Dio getDio() {
   );
   dio.interceptors.addAll([
     // Append authorization
-    InterceptorsWrapper(onRequest: (options, handler) {
-      var localStorage = LocalStorage('mgcs_app');
-      var token = localStorage.getItem(AuthenticationService.authTokenKey);
+    InterceptorsWrapper(onRequest: (options, handler) async {
+      var localStorage = await getLocalStorage();
+      var token = localStorage.getString(AuthenticationService.authTokenKey);
       if (token != null) {
         dio.options.headers[HttpHeaders.authorizationHeader] = "Bearer $token";
       }

@@ -1,3 +1,4 @@
+import 'package:mgcs_app/services/authentication_service.dart';
 import 'package:mgcs_app/ui/views/auth/login_view.dart';
 import 'package:mgcs_app/ui/views/home/home_view.dart';
 import 'package:mgcs_app/ui/views/intro/intro_view.dart';
@@ -14,6 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
+    Singleton(classType: AuthenticationService),
   ],
   logger: StackedLogger(),
 )

@@ -3,10 +3,10 @@ part 'login_response.freezed.dart';
 part 'login_response.g.dart';
 
 @freezed
-@JsonSerializable(fieldRename: FieldRename.snake)
 class LoginResponse with _$LoginResponse {
   LoginResponse._();
 
+  @JsonSerializable(fieldRename: FieldRename.snake)
   factory LoginResponse({
     required String accessToken,
   }) = _LoginResponse;

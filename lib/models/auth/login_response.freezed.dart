@@ -93,7 +93,8 @@ class __$$_LoginResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_LoginResponse extends _LoginResponse {
   _$_LoginResponse({required this.accessToken}) : super._();
 

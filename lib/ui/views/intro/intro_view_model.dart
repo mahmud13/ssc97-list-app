@@ -1,6 +1,6 @@
-import 'package:localstorage/localstorage.dart';
 import 'package:mgcs_app/app/app.locator.dart';
 import 'package:mgcs_app/app/app.router.dart';
+import 'package:mgcs_app/app/localstorage.dart';
 import 'package:stacked/stacked.dart';
 import 'package:mgcs_app/app/app.logger.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -8,7 +8,6 @@ import 'package:stacked_services/stacked_services.dart';
 class IntroViewModel extends BaseViewModel {
   final log = getLogger('Intro');
   final _navigationService = locator<NavigationService>();
-  final LocalStorage storage = LocalStorage('mgcs_app');
   late int totalSteps;
   int _activeStep = 0;
   int get activeStep => _activeStep;
@@ -37,7 +36,9 @@ class IntroViewModel extends BaseViewModel {
     }
   }
 
-  void navigateToLogin() {
+  void navigateToLogin() async {
+    var localstorage = await getLocalStorage();
+    localstorage.setBool('introShown', true);
     _navigationService.navigateTo(Routes.homeView);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mgcs_app/services/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:mgcs_app/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,6 +17,8 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setupLocator();
+  var authService = locator<AuthenticationService>();
+  await authService.initializeAuth();
   runApp(const MyApp());
 }
 
@@ -44,9 +47,9 @@ class MyApp extends StatelessWidget {
       );
 
   RouteSettings _guardedSettings(RouteSettings settings) {
+    final authService = locator<AuthenticationService>();
     final path = settings.name;
-    const signedIn = false;
-    print(path);
+    var signedIn = authService.loggedIn;
     // if you want a path to always be allowed place before your route guards
     if (path == Routes.introView || path == Routes.startupView) return settings;
 
