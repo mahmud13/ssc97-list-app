@@ -2,7 +2,10 @@ import 'package:mgcs_app/services/authentication_service.dart';
 import 'package:mgcs_app/ui/views/auth/login_view.dart';
 import 'package:mgcs_app/ui/views/home/home_view.dart';
 import 'package:mgcs_app/ui/views/intro/intro_view.dart';
+import 'package:mgcs_app/ui/views/profile/profile_view.dart';
+import 'package:mgcs_app/ui/views/settings/settings_view.dart';
 import 'package:mgcs_app/ui/views/startup/startup_view.dart';
+import 'package:mgcs_app/ui/views/track/track_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -11,6 +14,9 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: StartupView, path: '/', initial: true),
     MaterialRoute(page: IntroView, path: '/intro'),
     MaterialRoute(page: HomeView, path: '/home'),
+    MaterialRoute(page: TrackView, path: '/track'),
+    MaterialRoute(page: SettingsView, path: '/settings'),
+    MaterialRoute(page: ProfileView, path: '/profile'),
     MaterialRoute(page: LoginView, path: '/login'),
   ],
   dependencies: [

@@ -13,17 +13,26 @@ import 'package:stacked_services/stacked_services.dart';
 import '../ui/views/auth/login_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/intro/intro_view.dart';
+import '../ui/views/profile/profile_view.dart';
+import '../ui/views/settings/settings_view.dart';
 import '../ui/views/startup/startup_view.dart';
+import '../ui/views/track/track_view.dart';
 
 class Routes {
   static const String startupView = '/';
   static const String introView = '/intro';
   static const String homeView = '/home';
+  static const String trackView = '/track';
+  static const String settingsView = '/settings';
+  static const String profileView = '/profile';
   static const String loginView = '/login';
   static const all = <String>{
     startupView,
     introView,
     homeView,
+    trackView,
+    settingsView,
+    profileView,
     loginView,
   };
 }
@@ -35,6 +44,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.startupView, page: StartupView),
     RouteDef(Routes.introView, page: IntroView),
     RouteDef(Routes.homeView, page: HomeView),
+    RouteDef(Routes.trackView, page: TrackView),
+    RouteDef(Routes.settingsView, page: SettingsView),
+    RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.loginView, page: LoginView),
   ];
   @override
@@ -55,6 +67,24 @@ class StackedRouter extends RouterBase {
     HomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const HomeView(),
+        settings: data,
+      );
+    },
+    TrackView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const TrackView(),
+        settings: data,
+      );
+    },
+    SettingsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const SettingsView(),
+        settings: data,
+      );
+    },
+    ProfileView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ProfileView(),
         settings: data,
       );
     },
@@ -113,6 +143,54 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.homeView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToTrackView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.trackView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToSettingsView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.settingsView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToProfileView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.profileView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
