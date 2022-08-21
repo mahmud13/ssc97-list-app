@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:mgcs_app/ui/views/intro/intro_view_model.dart';
 import 'package:stacked/stacked.dart';
-import 'package:mgcs_app/generated/l10n.dart';
 
 import 'intro_slides_view.dart';
 
@@ -12,7 +11,6 @@ class IntroView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var s = S.of(context);
     return ViewModelBuilder<IntroViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(

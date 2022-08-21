@@ -22,12 +22,11 @@ class LoginViewModel extends BaseViewModel {
         firebaseUid: state.user!.uid,
       );
       log.i('User logged in. Redirecting to home');
-      _navigationService.replaceWith(Routes.homeView);
+      navigateToHome();
     }
   }
 
   void navigateToHome() {
-    log.v('navigating to home');
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.replaceWith(Routes.homeView);
   }
 }

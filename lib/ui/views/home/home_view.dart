@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mgcs_app/ui/layouts/home_layout_view.dart';
 import 'package:mgcs_app/ui/views/home/home_view_model.dart';
 import 'package:stacked/stacked.dart';
-import 'package:mgcs_app/generated/l10n.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -9,10 +9,10 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var s = S.of(context);
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
-        return Scaffold(
+        return HomeLayoutView(
+          selectedMenuIndex: 0,
           body: SafeArea(
             child: Center(
               child: model.user == null
@@ -20,10 +20,19 @@ class HomeView extends StatelessWidget {
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Hello, ${model.user!.name}",
-                          style: TextStyle(
-                              fontSize: 93, color: theme.primaryColor),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Hello, ${model.user!.name}",
+                              ),
+                              ElevatedButton(
+                                onPressed: () => null,
+                                child: const Text('Get Started'),
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
