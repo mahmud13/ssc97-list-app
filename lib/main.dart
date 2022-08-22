@@ -57,6 +57,11 @@ class MyApp extends StatelessWidget {
     if (!signedIn && path != Routes.loginView) {
       return const RouteSettings(name: Routes.loginView);
     }
+    if (authService.user != null &&
+        authService.user!.expertiseLevel == null &&
+        path == Routes.homeView) {
+      return const RouteSettings(name: Routes.expertiseLevelView);
+    }
 
     // no route guards violated, return the settings for the desired route
     return settings;

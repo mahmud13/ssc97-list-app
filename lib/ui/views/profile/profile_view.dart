@@ -8,7 +8,6 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return ViewModelBuilder<ProfileViewModel>.reactive(
       builder: (context, model, child) {
         return HomeLayoutView(

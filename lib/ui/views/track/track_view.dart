@@ -8,7 +8,6 @@ class TrackView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return ViewModelBuilder<TrackViewModel>.reactive(
       builder: (context, model, child) {
         return HomeLayoutView(

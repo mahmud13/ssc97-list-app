@@ -24,6 +24,7 @@ mixin _$User {
   String? get email => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
+  String? get expertiseLevel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,12 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({int id, String? email, String name, String? phone});
+  $Res call(
+      {int id,
+      String? email,
+      String name,
+      String? phone,
+      String? expertiseLevel});
 }
 
 /// @nodoc
@@ -51,6 +57,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? email = freezed,
     Object? name = freezed,
     Object? phone = freezed,
+    Object? expertiseLevel = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -69,6 +76,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      expertiseLevel: expertiseLevel == freezed
+          ? _value.expertiseLevel
+          : expertiseLevel // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -78,7 +89,12 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String? email, String name, String? phone});
+  $Res call(
+      {int id,
+      String? email,
+      String name,
+      String? phone,
+      String? expertiseLevel});
 }
 
 /// @nodoc
@@ -96,6 +112,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? email = freezed,
     Object? name = freezed,
     Object? phone = freezed,
+    Object? expertiseLevel = freezed,
   }) {
     return _then(_$_User(
       id: id == freezed
@@ -114,6 +131,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      expertiseLevel: expertiseLevel == freezed
+          ? _value.expertiseLevel
+          : expertiseLevel // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -122,7 +143,12 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_User extends _User {
-  _$_User({required this.id, this.email, required this.name, this.phone})
+  _$_User(
+      {required this.id,
+      this.email,
+      required this.name,
+      this.phone,
+      this.expertiseLevel})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -135,10 +161,12 @@ class _$_User extends _User {
   final String name;
   @override
   final String? phone;
+  @override
+  final String? expertiseLevel;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, name: $name, phone: $phone)';
+    return 'User(id: $id, email: $email, name: $name, phone: $phone, expertiseLevel: $expertiseLevel)';
   }
 
   @override
@@ -149,7 +177,9 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.phone, phone));
+            const DeepCollectionEquality().equals(other.phone, phone) &&
+            const DeepCollectionEquality()
+                .equals(other.expertiseLevel, expertiseLevel));
   }
 
   @JsonKey(ignore: true)
@@ -159,7 +189,8 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(phone));
+      const DeepCollectionEquality().hash(phone),
+      const DeepCollectionEquality().hash(expertiseLevel));
 
   @JsonKey(ignore: true)
   @override
@@ -179,7 +210,8 @@ abstract class _User extends User {
       {required final int id,
       final String? email,
       required final String name,
-      final String? phone}) = _$_User;
+      final String? phone,
+      final String? expertiseLevel}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -192,6 +224,8 @@ abstract class _User extends User {
   String get name;
   @override
   String? get phone;
+  @override
+  String? get expertiseLevel;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

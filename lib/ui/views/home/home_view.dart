@@ -8,34 +8,35 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
         return HomeLayoutView(
           selectedMenuIndex: 0,
           body: SafeArea(
             child: Center(
-              child: model.user == null
+              child: model.isBusy
                   ? const CircularProgressIndicator()
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Hello, ${model.user!.name}",
+                  : model.user == null
+                      ? const Text('A disaster happended')
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Hello, ${model.user!.name}",
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () => null,
+                                    child: const Text('Get Started'),
+                                  )
+                                ],
                               ),
-                              ElevatedButton(
-                                onPressed: () => null,
-                                child: const Text('Get Started'),
-                              )
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
             ),
           ),
         );

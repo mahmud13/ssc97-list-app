@@ -11,6 +11,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../ui/views/auth/login_view.dart';
+import '../ui/views/expertise_level/expertise_level_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/intro/intro_view.dart';
 import '../ui/views/profile/profile_view.dart';
@@ -21,6 +22,7 @@ import '../ui/views/track/track_view.dart';
 class Routes {
   static const String startupView = '/';
   static const String introView = '/intro';
+  static const String expertiseLevelView = '/expertise-level';
   static const String homeView = '/home';
   static const String trackView = '/track';
   static const String settingsView = '/settings';
@@ -29,6 +31,7 @@ class Routes {
   static const all = <String>{
     startupView,
     introView,
+    expertiseLevelView,
     homeView,
     trackView,
     settingsView,
@@ -43,6 +46,7 @@ class StackedRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.startupView, page: StartupView),
     RouteDef(Routes.introView, page: IntroView),
+    RouteDef(Routes.expertiseLevelView, page: ExpertiseLevelView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.trackView, page: TrackView),
     RouteDef(Routes.settingsView, page: SettingsView),
@@ -61,6 +65,12 @@ class StackedRouter extends RouterBase {
     IntroView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const IntroView(),
+        settings: data,
+      );
+    },
+    ExpertiseLevelView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ExpertiseLevelView(),
         settings: data,
       );
     },
@@ -127,6 +137,22 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.introView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToExpertiseLevelView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.expertiseLevelView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

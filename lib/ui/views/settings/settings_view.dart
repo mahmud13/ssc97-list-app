@@ -8,7 +8,6 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return ViewModelBuilder<SettingsViewModel>.reactive(
       builder: (context, model, child) {
         return HomeLayoutView(

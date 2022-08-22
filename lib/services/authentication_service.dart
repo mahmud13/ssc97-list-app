@@ -57,7 +57,7 @@ class AuthenticationService with ReactiveServiceMixin {
         data: {
           "grant_type": "firebase",
           "client_id": 1,
-          "client_secret": "6hLBjXTbyIGicLLxyEjHdUjlx7NgF6jIlCBacHyO",
+          "client_secret": "cOqxgG077cQ2F8zvWD8ndYxGJ4TIdZ7IF9kLlCjh",
           "firebase_token": firebaseToken,
           "firebase_uid": firebaseUid,
         },
@@ -144,6 +144,7 @@ class AuthenticationService with ReactiveServiceMixin {
   ///
   /// @return void
   void handleError(DioError error) {
+    deleteToken();
     if (error.response == null) {
       return;
     }
@@ -167,6 +168,28 @@ class AuthenticationService with ReactiveServiceMixin {
         break;
       default:
         log.e("Something went wrong.");
+    }
+  }
+
+  Future setExpertiseLevel(String level) async {
+    try {
+      log.i('updating user...');
+
+      Response response = await dio.patch(
+        '/me',
+        data: {
+          "expertise_level": level,
+        },
+      );
+      log.i("Update Response");
+      var result = ApiResult.fromResponse(response, User.fromJson);
+      if (result is Success<User>) {
+        _user.value = result.data;
+      }
+
+      return response;
+    } on DioError catch (e) {
+      handleError(e);
     }
   }
 }

@@ -30,10 +30,10 @@ class StartupViewModel extends BaseViewModel {
     var localstorage = await getLocalStorage();
     if (localstorage.getBool('introShown') == true) {
       log.v('Already show, redirecting to home');
-      _navigationService.navigateTo(Routes.homeView);
+      _navigationService.replaceWith(Routes.homeView);
     } else {
       log.v('New comer, showing intro screen');
-      _navigationService.navigateTo(Routes.introView);
+      _navigationService.replaceWith(Routes.introView);
     }
   }
 }

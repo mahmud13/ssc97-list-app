@@ -1,5 +1,6 @@
 import 'package:mgcs_app/services/authentication_service.dart';
 import 'package:mgcs_app/ui/views/auth/login_view.dart';
+import 'package:mgcs_app/ui/views/expertise_level/expertise_level_view.dart';
 import 'package:mgcs_app/ui/views/home/home_view.dart';
 import 'package:mgcs_app/ui/views/intro/intro_view.dart';
 import 'package:mgcs_app/ui/views/profile/profile_view.dart';
@@ -13,6 +14,7 @@ import 'package:stacked_services/stacked_services.dart';
   routes: [
     MaterialRoute(page: StartupView, path: '/', initial: true),
     MaterialRoute(page: IntroView, path: '/intro'),
+    MaterialRoute(page: ExpertiseLevelView, path: '/expertise-level'),
     MaterialRoute(page: HomeView, path: '/home'),
     MaterialRoute(page: TrackView, path: '/track'),
     MaterialRoute(page: SettingsView, path: '/settings'),
