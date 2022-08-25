@@ -24,7 +24,7 @@ mixin _$User {
   String? get email => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
-  String? get expertiseLevel => throw _privateConstructorUsedError;
+  WordDifficulty? get wordDifficulty => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,7 +40,9 @@ abstract class $UserCopyWith<$Res> {
       String? email,
       String name,
       String? phone,
-      String? expertiseLevel});
+      WordDifficulty? wordDifficulty});
+
+  $WordDifficultyCopyWith<$Res>? get wordDifficulty;
 }
 
 /// @nodoc
@@ -57,7 +59,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? email = freezed,
     Object? name = freezed,
     Object? phone = freezed,
-    Object? expertiseLevel = freezed,
+    Object? wordDifficulty = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -76,11 +78,22 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      expertiseLevel: expertiseLevel == freezed
-          ? _value.expertiseLevel
-          : expertiseLevel // ignore: cast_nullable_to_non_nullable
-              as String?,
+      wordDifficulty: wordDifficulty == freezed
+          ? _value.wordDifficulty
+          : wordDifficulty // ignore: cast_nullable_to_non_nullable
+              as WordDifficulty?,
     ));
+  }
+
+  @override
+  $WordDifficultyCopyWith<$Res>? get wordDifficulty {
+    if (_value.wordDifficulty == null) {
+      return null;
+    }
+
+    return $WordDifficultyCopyWith<$Res>(_value.wordDifficulty!, (value) {
+      return _then(_value.copyWith(wordDifficulty: value));
+    });
   }
 }
 
@@ -94,7 +107,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? email,
       String name,
       String? phone,
-      String? expertiseLevel});
+      WordDifficulty? wordDifficulty});
+
+  @override
+  $WordDifficultyCopyWith<$Res>? get wordDifficulty;
 }
 
 /// @nodoc
@@ -112,7 +128,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? email = freezed,
     Object? name = freezed,
     Object? phone = freezed,
-    Object? expertiseLevel = freezed,
+    Object? wordDifficulty = freezed,
   }) {
     return _then(_$_User(
       id: id == freezed
@@ -131,10 +147,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      expertiseLevel: expertiseLevel == freezed
-          ? _value.expertiseLevel
-          : expertiseLevel // ignore: cast_nullable_to_non_nullable
-              as String?,
+      wordDifficulty: wordDifficulty == freezed
+          ? _value.wordDifficulty
+          : wordDifficulty // ignore: cast_nullable_to_non_nullable
+              as WordDifficulty?,
     ));
   }
 }
@@ -148,7 +164,7 @@ class _$_User extends _User {
       this.email,
       required this.name,
       this.phone,
-      this.expertiseLevel})
+      this.wordDifficulty})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -162,11 +178,11 @@ class _$_User extends _User {
   @override
   final String? phone;
   @override
-  final String? expertiseLevel;
+  final WordDifficulty? wordDifficulty;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, name: $name, phone: $phone, expertiseLevel: $expertiseLevel)';
+    return 'User(id: $id, email: $email, name: $name, phone: $phone, wordDifficulty: $wordDifficulty)';
   }
 
   @override
@@ -179,7 +195,7 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.phone, phone) &&
             const DeepCollectionEquality()
-                .equals(other.expertiseLevel, expertiseLevel));
+                .equals(other.wordDifficulty, wordDifficulty));
   }
 
   @JsonKey(ignore: true)
@@ -190,7 +206,7 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(expertiseLevel));
+      const DeepCollectionEquality().hash(wordDifficulty));
 
   @JsonKey(ignore: true)
   @override
@@ -211,7 +227,7 @@ abstract class _User extends User {
       final String? email,
       required final String name,
       final String? phone,
-      final String? expertiseLevel}) = _$_User;
+      final WordDifficulty? wordDifficulty}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -225,7 +241,7 @@ abstract class _User extends User {
   @override
   String? get phone;
   @override
-  String? get expertiseLevel;
+  WordDifficulty? get wordDifficulty;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

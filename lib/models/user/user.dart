@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mgcs_app/models/word_difficulty/word_difficulty.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
@@ -12,7 +13,7 @@ class User with _$User {
     String? email,
     required String name,
     String? phone,
-    String? expertiseLevel,
+    WordDifficulty? wordDifficulty,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

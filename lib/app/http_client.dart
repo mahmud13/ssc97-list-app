@@ -7,9 +7,10 @@ import 'package:mgcs_app/services/authentication_service.dart';
 Dio getDio() {
   Dio dio = Dio(
     BaseOptions(
-      baseUrl: 'http://10.0.0.100:7001/api/v1',
+      baseUrl: 'http://10.0.0.101:7001/api/v1',
       connectTimeout: 5000,
       receiveTimeout: 3000,
+      headers: {HttpHeaders.acceptHeader: 'application/json'},
     ),
   );
   dio.interceptors.addAll([
@@ -18,7 +19,8 @@ Dio getDio() {
       var localStorage = await getLocalStorage();
       var token = localStorage.getString(AuthenticationService.authTokenKey);
       if (token != null) {
-        dio.options.headers[HttpHeaders.authorizationHeader] = "Bearer $token";
+        options.headers
+            .addAll({HttpHeaders.authorizationHeader: "Bearer $token"});
       }
       return handler.next(options);
     })

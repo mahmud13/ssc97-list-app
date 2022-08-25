@@ -1,14 +1,18 @@
+import 'package:mgcs_app/app/app.locator.dart';
 import 'package:mgcs_app/app/app.logger.dart';
 import 'package:mgcs_app/app/http_client.dart';
 import 'package:mgcs_app/app/localstorage.dart';
 import 'package:mgcs_app/models/api_helpers/api_wrapper.dart';
 import 'package:mgcs_app/models/auth/login_response.dart';
 import 'package:mgcs_app/models/user/user.dart';
+import 'package:mgcs_app/models/word_difficulty/word_difficulty.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dio/dio.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AuthenticationService with ReactiveServiceMixin {
   final log = getLogger('AuthenticationService');
+  final _snackbarService = locator<SnackbarService>();
   final dio = getDio();
 
   AuthenticationService() {
@@ -49,32 +53,28 @@ class AuthenticationService with ReactiveServiceMixin {
     required String firebaseToken,
     required String firebaseUid,
   }) async {
-    try {
-      log.i('Logging in...');
+    log.i('Logging in...');
 
-      Response response = await dio.post(
-        '/login',
-        data: {
-          "grant_type": "firebase",
-          "client_id": 1,
-          "client_secret": "cOqxgG077cQ2F8zvWD8ndYxGJ4TIdZ7IF9kLlCjh",
-          "firebase_token": firebaseToken,
-          "firebase_uid": firebaseUid,
-        },
-      );
-      log.i("login Response");
-      log.i(response.data);
-      LoginResponse data = LoginResponse.fromJson(response.data);
-      _token.value = data.accessToken;
-      setToken(data.accessToken);
-      await fetchUser();
+    Response response = await dio.post(
+      '/login',
+      data: {
+        "grant_type": "firebase",
+        "client_id": 1,
+        "client_secret": "cOqxgG077cQ2F8zvWD8ndYxGJ4TIdZ7IF9kLlCjh",
+        "firebase_token": firebaseToken,
+        "firebase_uid": firebaseUid,
+      },
+    );
+    log.i("login Response");
+    log.i(response.data);
+    LoginResponse data = LoginResponse.fromJson(response.data);
+    _token.value = data.accessToken;
+    setToken(data.accessToken);
+    await fetchUser();
 
-      log.i('Logged in');
+    log.i('Logged in');
 
-      return response;
-    } on DioError catch (e) {
-      handleError(e);
-    }
+    return response;
   }
 
   /// Fetch the current authenticated user.
@@ -86,7 +86,7 @@ class AuthenticationService with ReactiveServiceMixin {
         '/me',
         options: authorizationHeader,
       );
-      var result = ApiResult.fromResponse(response, User.fromJson);
+      var result = ApiResult.fromResponse<User>(response, User.fromJson);
       if (result is Success<User>) {
         _user.value = result.data;
       }
@@ -104,6 +104,7 @@ class AuthenticationService with ReactiveServiceMixin {
       _user.value = null;
     } on DioError catch (e) {
       handleError(e);
+      rethrow;
     }
   }
 
@@ -146,39 +147,62 @@ class AuthenticationService with ReactiveServiceMixin {
   void handleError(DioError error) {
     deleteToken();
     if (error.response == null) {
+      _snackbarService.showSnackbar(
+        title: 'Error',
+        message: error.message,
+      );
       return;
     }
     log.e(error.response);
     switch (error.response!.statusCode) {
       case 403:
-        log.e("You do not have the right privileges to access this resource.");
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message:
+              "You do not have the right privileges to access this resource.",
+        );
         break;
       case 422:
-        log.e("The data you have provided is invalid.");
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message: "The data you have provided is invalid.",
+        );
         break;
       case 401:
-        log.e("Incorrect credentials.");
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message: "Incorrect credentials.",
+        );
         break;
       case 404:
-        log.e("Request not found.");
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message: "Request not found.",
+        );
         break;
       case 500:
-        log.e(
-            "There is something wrong with our servers, please report to the admin so it gets fixed.");
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message:
+              "There is something wrong with our servers, please report to the admin so it gets fixed.",
+        );
         break;
       default:
-        log.e("Something went wrong.");
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message: "Something went wrong.",
+        );
     }
   }
 
-  Future setExpertiseLevel(String level) async {
+  Future setWordDifficulty(WordDifficulty difficulty) async {
     try {
       log.i('updating user...');
 
       Response response = await dio.patch(
         '/me',
         data: {
-          "expertise_level": level,
+          "word_difficulty_id": difficulty.id,
         },
       );
       log.i("Update Response");

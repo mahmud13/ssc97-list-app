@@ -18,6 +18,25 @@ abstract class ApiResult<T> {
       return InternalError();
     }
   }
+
+  static List<T> listMapper<T>(
+      List l, T Function(Map<String, dynamic>) mapper) {
+    return l.map((e) => mapper(e)).toList();
+  }
+
+  static ApiResult<List<T>> fromResponseAsList<T>(
+      Response response, T Function(Map<String, dynamic>) mapper) {
+    final responseData = response.data;
+
+    if (responseData[_jsonNodeErrors] != null) {
+      return ServerError.fromResponse(response);
+    } else if (responseData[_jsonNodeData] != null) {
+      var dd = responseData[_jsonNodeData];
+      return Success(listMapper(dd, mapper));
+    } else {
+      return InternalError();
+    }
+  }
 }
 
 class Success<T> extends ApiResult<T> {

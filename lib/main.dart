@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mgcs_app/app/snackbars.dart';
 import 'package:mgcs_app/services/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:mgcs_app/generated/l10n.dart';
@@ -17,6 +18,7 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setupLocator();
+  setupSnackbarUi();
   var authService = locator<AuthenticationService>();
   await authService.initializeAuth();
   runApp(const MyApp());
@@ -58,7 +60,7 @@ class MyApp extends StatelessWidget {
       return const RouteSettings(name: Routes.loginView);
     }
     if (authService.user != null &&
-        authService.user!.expertiseLevel == null &&
+        authService.user!.wordDifficulty == null &&
         path == Routes.homeView) {
       return const RouteSettings(name: Routes.expertiseLevelView);
     }
