@@ -5,7 +5,7 @@ import 'package:mgcs_app/app/localstorage.dart';
 import 'package:mgcs_app/models/api_helpers/api_wrapper.dart';
 import 'package:mgcs_app/models/auth/login_response.dart';
 import 'package:mgcs_app/models/user/user.dart';
-import 'package:mgcs_app/models/word_difficulty/word_difficulty.dart';
+import 'package:mgcs_app/models/words/word.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dio/dio.dart';
 import 'package:stacked_services/stacked_services.dart';

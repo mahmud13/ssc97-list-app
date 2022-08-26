@@ -14,6 +14,7 @@ import '../ui/views/auth/login_view.dart';
 import '../ui/views/expertise_level/expertise_level_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/intro/intro_view.dart';
+import '../ui/views/practice/practice_view.dart';
 import '../ui/views/profile/profile_view.dart';
 import '../ui/views/settings/settings_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -24,6 +25,7 @@ class Routes {
   static const String introView = '/intro';
   static const String expertiseLevelView = '/expertise-level';
   static const String homeView = '/home';
+  static const String practiceView = '/practice';
   static const String trackView = '/track';
   static const String settingsView = '/settings';
   static const String profileView = '/profile';
@@ -33,6 +35,7 @@ class Routes {
     introView,
     expertiseLevelView,
     homeView,
+    practiceView,
     trackView,
     settingsView,
     profileView,
@@ -48,6 +51,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.introView, page: IntroView),
     RouteDef(Routes.expertiseLevelView, page: ExpertiseLevelView),
     RouteDef(Routes.homeView, page: HomeView),
+    RouteDef(Routes.practiceView, page: PracticeView),
     RouteDef(Routes.trackView, page: TrackView),
     RouteDef(Routes.settingsView, page: SettingsView),
     RouteDef(Routes.profileView, page: ProfileView),
@@ -77,6 +81,12 @@ class StackedRouter extends RouterBase {
     HomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const HomeView(),
+        settings: data,
+      );
+    },
+    PracticeView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const PracticeView(),
         settings: data,
       );
     },
@@ -169,6 +179,22 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.homeView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToPracticeView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.practiceView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mgcs_app/models/word_difficulty/word_difficulty.dart';
+import 'package:mgcs_app/models/words/word.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 

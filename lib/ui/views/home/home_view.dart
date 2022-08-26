@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
                                     "Hello, ${model.user!.name}",
                                   ),
                                   ElevatedButton(
-                                    onPressed: () => null,
+                                    onPressed: () => model.goToPracticeView(),
                                     child: const Text('Get Started'),
                                   )
                                 ],

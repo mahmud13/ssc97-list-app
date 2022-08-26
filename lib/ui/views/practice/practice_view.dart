@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mgcs_app/config.dart' as config;
 import 'package:mgcs_app/ui/layouts/home_layout_view.dart';
-import 'package:mgcs_app/ui/views/practice_view/practice_view_model.dart';
+import 'package:mgcs_app/ui/views/practice/practice_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class PracticeView extends StatelessWidget {
@@ -16,8 +18,8 @@ class PracticeView extends StatelessWidget {
             child: Center(
               child: model.isBusy
                   ? const CircularProgressIndicator()
-                  : model.user == null
-                      ? const Text('A disaster happended')
+                  : model.words.isEmpty
+                      ? const Text('No words found')
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -25,12 +27,19 @@ class PracticeView extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    "Hello, ${model.user!.name}",
+                                  Text(model.currentWord!.word),
+                                  Text(model.currentWord!.transliteration),
+                                  CachedNetworkImage(
+                                    imageUrl:
+                                        "${config.apiUrl}/files?path=${model.currentWord!.picture}",
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: ((context, url, error) =>
+                                        const Text('No Image')),
                                   ),
                                   ElevatedButton(
                                     onPressed: () => null,
-                                    child: const Text('Get Started'),
+                                    child: const Text('Practice Screen'),
                                   )
                                 ],
                               ),
