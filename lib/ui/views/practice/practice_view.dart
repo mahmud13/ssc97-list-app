@@ -27,7 +27,10 @@ class PracticeView extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(model.currentWord!.word),
+                                  Text(
+                                    model.currentWord!.word,
+                                    style: const TextStyle(fontSize: 40),
+                                  ),
                                   Text(model.currentWord!.transliteration),
                                   CachedNetworkImage(
                                     imageUrl:
@@ -37,10 +40,32 @@ class PracticeView extends StatelessWidget {
                                     errorWidget: ((context, url, error) =>
                                         const Text('No Image')),
                                   ),
+                                  Listener(
+                                    onPointerMove: (e) => model.stopRecording(),
+                                    child: LongPressDraggable(
+                                      axis: Axis.horizontal,
+                                      feedback: FloatingActionButton(
+                                        onPressed: () {},
+                                        child: const Icon(
+                                          Icons.keyboard_voice_outlined,
+                                        ),
+                                      ),
+                                      childWhenDragging:
+                                          const Text('recording'),
+                                      onDragStarted: model.startRecording,
+                                      onDragEnd: (details) =>
+                                          model.stopRecording(),
+                                      child: IconButton(
+                                        onPressed: model.checkPermission,
+                                        icon: const Icon(
+                                          Icons.keyboard_voice_outlined,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   ElevatedButton(
-                                    onPressed: () => null,
-                                    child: const Text('Practice Screen'),
-                                  )
+                                      onPressed: model.play,
+                                      child: const Text('play'))
                                 ],
                               ),
                             ),
