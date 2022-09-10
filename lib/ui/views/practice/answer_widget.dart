@@ -37,7 +37,7 @@ class AnswerWidget extends ViewModelWidget<PracticeViewModel> {
         ),
         verticalSpaceLarge,
         ElevatedButton(
-          onPressed: () => viewModel.showAnswer(),
+          onPressed: () => viewModel.showFeedback(),
           child: const Text('Check'),
         )
       ],
