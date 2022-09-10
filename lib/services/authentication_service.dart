@@ -2,6 +2,7 @@ import 'package:mgcs_app/app/app.locator.dart';
 import 'package:mgcs_app/app/app.logger.dart';
 import 'package:mgcs_app/app/http_client.dart';
 import 'package:mgcs_app/app/localstorage.dart';
+import 'package:mgcs_app/config.dart' as config;
 import 'package:mgcs_app/models/api_helpers/api_wrapper.dart';
 import 'package:mgcs_app/models/auth/login_response.dart';
 import 'package:mgcs_app/models/user/user.dart';
@@ -60,7 +61,7 @@ class AuthenticationService with ReactiveServiceMixin {
       data: {
         "grant_type": "firebase",
         "client_id": 1,
-        "client_secret": "cOqxgG077cQ2F8zvWD8ndYxGJ4TIdZ7IF9kLlCjh",
+        "client_secret": config.clientSecret,
         "firebase_token": firebaseToken,
         "firebase_uid": firebaseUid,
       },

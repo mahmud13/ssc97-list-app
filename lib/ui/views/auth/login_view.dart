@@ -8,7 +8,11 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const providerConfigs = [EmailProviderConfiguration()];
+    var l = Localizations.localeOf(context);
+    const providerConfigs = [
+      EmailProviderConfiguration(),
+      PhoneProviderConfiguration(),
+    ];
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, widget) => SignInScreen(

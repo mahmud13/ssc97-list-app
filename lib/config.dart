@@ -1,1 +1,2 @@
-const String apiUrl = 'http://10.0.0.101:7001/api/v1';
+const String apiUrl = 'https://mgcs.anontech.info/api/v1';
+const String clientSecret = 'bl9qK34zKoj1L2qwyRuHVnxaHTLsGniStqHMueqd';
