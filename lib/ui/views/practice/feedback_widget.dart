@@ -15,84 +15,32 @@ class FeedbackWidget extends ViewModelWidget<PracticeViewModel> {
         RichText(
           softWrap: true,
           textWidthBasis: TextWidthBasis.longestLine,
-          text: const TextSpan(children: [
-            TextSpan(
-              text: "م",
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 48,
-                fontFamily: "uthmanic",
+          text: TextSpan(children: [
+            for (var l in viewModel.currentAnswer!.feedback.arabic)
+              TextSpan(
+                text: l.letter,
+                style: TextStyle(
+                  color: Color(l.colorCode),
+                  fontSize: 48,
+                  fontFamily: "uthmanic",
+                ),
               ),
-            ),
-            TextSpan(
-              text: "ؘ", //Diacritic
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 48,
-                fontFamily: "uthmanic",
-              ),
-            ),
-            TextSpan(
-              text: "س",
-              style: TextStyle(
-                color: Colors.green,
-                fontSize: 48,
-                fontFamily: "uthmanic",
-              ),
-            ),
-            TextSpan(
-              text: "۫",
-              style: TextStyle(
-                color: Colors.green,
-                fontSize: 48,
-                fontFamily: "uthmanic",
-              ),
-            ),
-            TextSpan(
-              text: "ج",
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 48,
-                fontFamily: "uthmanic",
-              ),
-            ),
-            TextSpan(
-              text: "ؚ",
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 48,
-                fontFamily: "uthmanic",
-              ),
-            ),
-            TextSpan(
-              text: "د",
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 48,
-                fontFamily: "uthmanic",
-              ),
-            ),
           ]),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (var c in [
-              {'m': 0xff11ff11},
-              {'a': 0xffff0000},
-              {'s': 0xff111111},
-              {'j': 0xff111111},
-              {'i': 0xff111111},
-              {'d': 0xff1144ff},
-            ])
-              Text(
-                c.keys.first,
+        RichText(
+          softWrap: true,
+          textWidthBasis: TextWidthBasis.longestLine,
+          text: TextSpan(children: [
+            for (var l in viewModel.currentAnswer!.feedback.transliteration)
+              TextSpan(
+                text: l.letter,
                 style: TextStyle(
-                  color: Color(c.values.first),
-                  fontSize: 34,
+                  color: Color(l.colorCode),
+                  fontSize: 48,
+                  fontFamily: "uthmanic",
                 ),
-              )
-          ],
+              ),
+          ]),
         ),
         verticalSpaceMedium,
         const Text('Practice Correct form using the options below'),
