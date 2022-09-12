@@ -18,7 +18,14 @@ class PracticeViewModel extends FutureViewModel {
 
   final dio = getDio();
   List<Word> words = [];
+  List<WordDifficulty> wordDifficulties = [];
+  List<WordCategory> wordCategories = [];
   int? currentWordIndex;
+  int? currentWordDifficultiesIndex;
+  int? currentWordCategoriesIndex;
+
+  WordDifficulty? selectedWordDifficulty;
+  WordCategory? selectedWordCategory;
 
   Word? get currentWord =>
       currentWordIndex != null ? words[currentWordIndex!] : null;
@@ -30,6 +37,28 @@ class PracticeViewModel extends FutureViewModel {
     log.i('initiated');
   }
 
+  int get wordDifficultyIndex {
+    return wordDifficulties.indexOf(selectedWordDifficulty != null
+        ? selectedWordDifficulty!
+        : wordDifficulties[0]);
+  }
+
+  int get wordCateroryIndex {
+    return wordCategories.indexOf(selectedWordCategory != null
+        ? selectedWordCategory!
+        : wordCategories[0]);
+  }
+
+  void onSelectedWordDifficulty(WordDifficulty? item) {
+    selectedWordDifficulty = item;
+    notifyListeners();
+  }
+
+  void onSelectedWordCategory(WordCategory? item) {
+    selectedWordCategory = item;
+    notifyListeners();
+  }
+
   Future fetchWords() async {
     try {
       var response = await dio.get('/words');
@@ -38,6 +67,40 @@ class PracticeViewModel extends FutureViewModel {
         words = result.data;
         if (words.isNotEmpty) {
           currentWordIndex = 0;
+        }
+      }
+    } catch (e) {
+      log.e(e);
+      rethrow;
+    }
+  }
+
+  Future fetchWordDifficulties() async {
+    try {
+      var response = await dio.get('/word-difficulties');
+      var result =
+          ApiResult.fromResponseAsList(response, WordDifficulty.fromJson);
+      if (result is Success<List<WordDifficulty>>) {
+        wordDifficulties = result.data;
+        if (wordDifficulties.isNotEmpty) {
+          currentWordDifficultiesIndex = 0;
+        }
+      }
+    } catch (e) {
+      log.e(e);
+      rethrow;
+    }
+  }
+
+  Future fetchWordCategories() async {
+    try {
+      var response = await dio.get('/word-categories');
+      var result =
+          ApiResult.fromResponseAsList(response, WordCategory.fromJson);
+      if (result is Success<List<WordCategory>>) {
+        wordCategories = result.data;
+        if (wordCategories.isNotEmpty) {
+          currentWordCategoriesIndex = 0;
         }
       }
     } catch (e) {
@@ -103,5 +166,7 @@ class PracticeViewModel extends FutureViewModel {
   @override
   Future futureToRun() async {
     await fetchWords();
+    await fetchWordDifficulties();
+    await fetchWordCategories();
   }
 }
