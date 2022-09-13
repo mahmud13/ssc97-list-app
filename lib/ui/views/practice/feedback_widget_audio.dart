@@ -1,15 +1,7 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data' show Uint8List;
 
-import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart' show DateFormat;
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedbackWidgetAudio extends StatelessWidget {
@@ -20,21 +12,26 @@ class FeedbackWidgetAudio extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<FeedbackWidgetAudioViewModel>.reactive(
       viewModelBuilder: () => FeedbackWidgetAudioViewModel(audio: audio),
-      builder: (context, model, child) => TextButton(
-        style: TextButton.styleFrom(
-          foregroundColor: Colors.black,
-        ),
-        onPressed: () {
-          model.play();
+      builder: (context, model, child) => GestureDetector(
+        onDoubleTap: () {
+          model.playWithSlowMo();
         },
-        child: Column(
-          children: const [
-            ImageIcon(
-              AssetImage('assets/icons/hear.png'),
-              size: 40,
-            ),
-            Text('Hear')
-          ],
+        child: TextButton(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.black,
+          ),
+          onPressed: () {
+            model.play();
+          },
+          child: Column(
+            children: const [
+              ImageIcon(
+                AssetImage('assets/icons/hear.png'),
+                size: 40,
+              ),
+              Text('Hear')
+            ],
+          ),
         ),
       ),
     );
@@ -57,7 +54,19 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
       initPlayer();
     }
     if (!_player.isPlaying) {
-      await _player.startPlayer(fromURI: audio, codec: Codec.aacMP4);
+      _player.setSpeed(1.0);
+      await _player.startPlayer(
+        fromURI: audio,
+        codec: Codec.aacMP4,
+      );
     }
+  }
+
+  Future<void> playWithSlowMo() async {
+    _player.setSpeed(0.4);
+    await _player.startPlayer(
+      fromURI: audio,
+      codec: Codec.aacMP4,
+    );
   }
 }
