@@ -263,7 +263,9 @@ class AnswerWidgetAudioViewModel extends BaseViewModel {
   void startStopRecorder() {
     if (recorderModule.isRecording || recorderModule.isPaused) {
       stopRecorder();
+      print("recorder stopped");
     } else {
+      print("record starting........");
       startRecorder();
     }
   }

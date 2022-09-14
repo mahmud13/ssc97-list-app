@@ -23,6 +23,7 @@ class AnswerWidget extends ViewModelWidget<PracticeViewModel> {
           style: const TextStyle(fontSize: 30),
         ),
         CachedNetworkImage(
+          height: 100,
           width: 200,
           imageUrl:
               "${config.apiUrl}/files?path=${viewModel.currentWord!.picture}",
