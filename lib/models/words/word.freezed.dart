@@ -377,6 +377,7 @@ mixin _$Word {
   String get audio => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
   int get sequence => throw _privateConstructorUsedError;
+  bool get isLiked => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -393,7 +394,8 @@ abstract class $WordCopyWith<$Res> {
       String transliteration,
       String audio,
       String picture,
-      int sequence});
+      int sequence,
+      bool isLiked});
 }
 
 /// @nodoc
@@ -412,6 +414,7 @@ class _$WordCopyWithImpl<$Res> implements $WordCopyWith<$Res> {
     Object? audio = freezed,
     Object? picture = freezed,
     Object? sequence = freezed,
+    Object? isLiked = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -438,6 +441,10 @@ class _$WordCopyWithImpl<$Res> implements $WordCopyWith<$Res> {
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
+      isLiked: isLiked == freezed
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -453,7 +460,8 @@ abstract class _$$_WordCopyWith<$Res> implements $WordCopyWith<$Res> {
       String transliteration,
       String audio,
       String picture,
-      int sequence});
+      int sequence,
+      bool isLiked});
 }
 
 /// @nodoc
@@ -473,6 +481,7 @@ class __$$_WordCopyWithImpl<$Res> extends _$WordCopyWithImpl<$Res>
     Object? audio = freezed,
     Object? picture = freezed,
     Object? sequence = freezed,
+    Object? isLiked = freezed,
   }) {
     return _then(_$_Word(
       id: id == freezed
@@ -499,6 +508,10 @@ class __$$_WordCopyWithImpl<$Res> extends _$WordCopyWithImpl<$Res>
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
+      isLiked: isLiked == freezed
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -513,7 +526,8 @@ class _$_Word extends _Word {
       required this.transliteration,
       required this.audio,
       required this.picture,
-      required this.sequence})
+      required this.sequence,
+      required this.isLiked})
       : super._();
 
   factory _$_Word.fromJson(Map<String, dynamic> json) => _$$_WordFromJson(json);
@@ -530,10 +544,12 @@ class _$_Word extends _Word {
   final String picture;
   @override
   final int sequence;
+  @override
+  final bool isLiked;
 
   @override
   String toString() {
-    return 'Word(id: $id, word: $word, transliteration: $transliteration, audio: $audio, picture: $picture, sequence: $sequence)';
+    return 'Word(id: $id, word: $word, transliteration: $transliteration, audio: $audio, picture: $picture, sequence: $sequence, isLiked: $isLiked)';
   }
 
   @override
@@ -547,7 +563,8 @@ class _$_Word extends _Word {
                 .equals(other.transliteration, transliteration) &&
             const DeepCollectionEquality().equals(other.audio, audio) &&
             const DeepCollectionEquality().equals(other.picture, picture) &&
-            const DeepCollectionEquality().equals(other.sequence, sequence));
+            const DeepCollectionEquality().equals(other.sequence, sequence) &&
+            const DeepCollectionEquality().equals(other.isLiked, isLiked));
   }
 
   @JsonKey(ignore: true)
@@ -559,7 +576,8 @@ class _$_Word extends _Word {
       const DeepCollectionEquality().hash(transliteration),
       const DeepCollectionEquality().hash(audio),
       const DeepCollectionEquality().hash(picture),
-      const DeepCollectionEquality().hash(sequence));
+      const DeepCollectionEquality().hash(sequence),
+      const DeepCollectionEquality().hash(isLiked));
 
   @JsonKey(ignore: true)
   @override
@@ -581,7 +599,8 @@ abstract class _Word extends Word {
       required final String transliteration,
       required final String audio,
       required final String picture,
-      required final int sequence}) = _$_Word;
+      required final int sequence,
+      required final bool isLiked}) = _$_Word;
   _Word._() : super._();
 
   factory _Word.fromJson(Map<String, dynamic> json) = _$_Word.fromJson;
@@ -598,6 +617,8 @@ abstract class _Word extends Word {
   String get picture;
   @override
   int get sequence;
+  @override
+  bool get isLiked;
   @override
   @JsonKey(ignore: true)
   _$$_WordCopyWith<_$_Word> get copyWith => throw _privateConstructorUsedError;

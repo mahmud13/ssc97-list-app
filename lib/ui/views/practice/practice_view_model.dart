@@ -121,10 +121,11 @@ class PracticeViewModel extends FutureViewModel {
           "audio": await MultipartFile.fromFile(currentRecording!.path,
               filename: fileName),
         });
-        Response response = await dio.post(
-          '/answers',
-          data: formData,
-        );
+        Response response = await dio.post('/answers',
+            data: formData,
+            options: Options(
+              receiveTimeout: 10 * 1000,
+            ));
 
         var result = ApiResult.fromResponse<Answer>(response, Answer.fromJson);
         if (result is Success<Answer>) {
@@ -174,5 +175,13 @@ class PracticeViewModel extends FutureViewModel {
     await fetchWords();
     await fetchWordDifficulties();
     await fetchWordCategories();
+  }
+
+  Future toggleLike(bool isLike) async {
+    if (isLike) {
+      await dio.put('/words/${currentWord!.id}/like');
+    } else {
+      await dio.put('/words/${currentWord!.id}/unlike');
+    }
   }
 }

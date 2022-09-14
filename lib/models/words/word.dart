@@ -42,6 +42,7 @@ class Word with _$Word {
     required String audio,
     required String picture,
     required int sequence,
+    required bool isLiked,
   }) = _Word;
 
   factory Word.fromJson(Map<String, dynamic> json) => _$WordFromJson(json);

@@ -41,6 +41,7 @@ _$_Word _$$_WordFromJson(Map<String, dynamic> json) => _$_Word(
       audio: json['audio'] as String,
       picture: json['picture'] as String,
       sequence: json['sequence'] as int,
+      isLiked: json['is_liked'] as bool,
     );
 
 Map<String, dynamic> _$$_WordToJson(_$_Word instance) => <String, dynamic>{
@@ -50,4 +51,5 @@ Map<String, dynamic> _$$_WordToJson(_$_Word instance) => <String, dynamic>{
       'audio': instance.audio,
       'picture': instance.picture,
       'sequence': instance.sequence,
+      'is_liked': instance.isLiked,
     };

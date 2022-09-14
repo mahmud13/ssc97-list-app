@@ -18,7 +18,7 @@ class WordFeedback with _$WordFeedback {
   WordFeedback._();
 
   factory WordFeedback({
-    required List<LetterAccuracy> arabic,
+    required String arabic,
     required List<LetterAccuracy> transliteration,
   }) = _WordFeedback;
   factory WordFeedback.fromJson(Map<String, dynamic> json) =>
