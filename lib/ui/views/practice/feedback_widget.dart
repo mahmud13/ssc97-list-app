@@ -50,9 +50,12 @@ class FeedbackWidget extends ViewModelWidget<PracticeViewModel> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const ImageIcon(
-              AssetImage('assets/icons/prev.png'),
-              size: 40,
+            IconButton(
+              onPressed: viewModel.prev,
+              icon: const ImageIcon(
+                AssetImage('assets/icons/prev.png'),
+                size: 40,
+              ),
             ),
             horizontalSpaceMedium,
             IconButton(

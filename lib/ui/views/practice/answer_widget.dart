@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mgcs_app/config.dart' as config;
-import 'package:mgcs_app/ui/views/intro/ui_helpers.dart';
 import 'package:mgcs_app/ui/views/practice/practice_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -33,13 +32,9 @@ class AnswerWidget extends ViewModelWidget<PracticeViewModel> {
         AnswerWidgetAudio(
           onStopRecording: (file) {
             viewModel.currentRecording = file;
+            viewModel.showFeedback();
           },
         ),
-        verticalSpaceLarge,
-        ElevatedButton(
-          onPressed: () => viewModel.showFeedback(),
-          child: const Text('Check'),
-        )
       ],
     );
   }
