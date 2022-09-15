@@ -22,12 +22,12 @@ class PracticeView extends StatelessWidget {
               children: [
                 if (model.isShowingFeedback)
                   RatingBar.builder(
-                    initialRating: model.currentAnswer!.accuracy * 5,
+                    initialRating: model.currentAnswer!.accuracy * 3,
                     ignoreGestures: true,
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
-                    itemCount: 5,
+                    itemCount: 3,
                     itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                     itemBuilder: (context, _) => const Icon(
                       Icons.star,
