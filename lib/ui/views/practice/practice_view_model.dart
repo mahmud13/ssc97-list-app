@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:mgcs_app/app/app.locator.dart';
@@ -23,6 +24,7 @@ class PracticeViewModel extends FutureViewModel {
   int? currentWordIndex;
   int? currentWordDifficultiesIndex;
   int? currentWordCategoriesIndex;
+  int page = Random().nextInt(30);
 
   WordDifficulty? selectedWordDifficulty;
   WordCategory? selectedWordCategory;
@@ -61,12 +63,12 @@ class PracticeViewModel extends FutureViewModel {
 
   Future fetchWords() async {
     try {
-      var response = await dio.get('/words');
+      var response = await dio.get('/words', queryParameters: {'page': page});
       var result = ApiResult.fromResponseAsList(response, Word.fromJson);
       if (result is Success<List<Word>>) {
-        words = result.data;
+        words = words.isEmpty ? result.data : [...words, ...result.data];
         if (words.isNotEmpty) {
-          currentWordIndex = 0;
+          currentWordIndex ??= 0;
         }
       }
     } catch (e) {
@@ -119,10 +121,11 @@ class PracticeViewModel extends FutureViewModel {
           "audio": await MultipartFile.fromFile(currentRecording!.path,
               filename: fileName),
         });
-        Response response = await dio.post(
-          '/answers',
-          data: formData,
-        );
+        Response response = await dio.post('/answers',
+            data: formData,
+            options: Options(
+              receiveTimeout: 10 * 1000,
+            ));
 
         var result = ApiResult.fromResponse<Answer>(response, Answer.fromJson);
         if (result is Success<Answer>) {
@@ -145,7 +148,11 @@ class PracticeViewModel extends FutureViewModel {
     notifyListeners();
   }
 
-  void next() {
+  Future next() async {
+    if (currentWordIndex != null && currentWordIndex == words.length - 1) {
+      page++;
+      await fetchWords();
+    }
     if (currentWordIndex != null && currentWordIndex! < words.length - 1) {
       currentWordIndex = currentWordIndex! + 1;
     }
@@ -168,5 +175,13 @@ class PracticeViewModel extends FutureViewModel {
     await fetchWords();
     await fetchWordDifficulties();
     await fetchWordCategories();
+  }
+
+  Future toggleLike(bool isLike) async {
+    if (isLike) {
+      await dio.put('/words/${currentWord!.id}/like');
+    } else {
+      await dio.put('/words/${currentWord!.id}/unlike');
+    }
   }
 }

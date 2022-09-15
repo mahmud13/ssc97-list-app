@@ -1,5 +1,5 @@
 name: mgcs_app
-description: MGCS APP
+description: 
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -57,6 +57,8 @@ dependencies:
   audio_session: ^0.1.10
   path_provider: ^2.0.11
   flutter_rating_bar: ^4.0.1
+  like_button: ^2.0.4
+  favorite_button: ^0.0.4
 
 dev_dependencies:
   flutter_test:
@@ -115,5 +117,5 @@ flutter_intl:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/icon.png"
+  image_path: "assets/icons/logo.png"
   min_sdk_android: 21 # android min sdk min:16, default 21

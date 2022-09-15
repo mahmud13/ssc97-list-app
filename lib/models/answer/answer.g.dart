@@ -20,9 +20,7 @@ Map<String, dynamic> _$$_LetterAccuracyToJson(_$_LetterAccuracy instance) =>
 
 _$_WordFeedback _$$_WordFeedbackFromJson(Map<String, dynamic> json) =>
     _$_WordFeedback(
-      arabic: (json['arabic'] as List<dynamic>)
-          .map((e) => LetterAccuracy.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      arabic: json['arabic'] as String,
       transliteration: (json['transliteration'] as List<dynamic>)
           .map((e) => LetterAccuracy.fromJson(e as Map<String, dynamic>))
           .toList(),

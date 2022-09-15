@@ -82,7 +82,7 @@ class AnswerWidgetAudioViewModel extends BaseViewModel {
 
   double sliderCurrentPosition = 0.0;
   double maxDuration = 1.0;
-  final Codec _codec = Codec.aacMP4;
+  final Codec _codec = Codec.pcm16WAV;
 
   StreamController<Food>? recordingDataController;
   IOSink? sink;
