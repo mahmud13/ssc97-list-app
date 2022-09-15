@@ -1,6 +1,6 @@
 # mgcs_app
 
-MGCS APP
+QVoice APP
 
 ## Getting Started
 

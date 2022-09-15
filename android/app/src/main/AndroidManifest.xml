@@ -3,7 +3,7 @@
    <!-- Permissions options for the `microphone` or `speech` group -->
    <uses-permission android:name="android.permission.RECORD_AUDIO" />
    <application
-        android:label="MGCS"
+        android:label="QVoice"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
