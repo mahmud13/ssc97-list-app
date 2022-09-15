@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:mgcs_app/config.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedbackWidgetAudio extends StatelessWidget {
@@ -39,6 +40,7 @@ class FeedbackWidgetAudio extends StatelessWidget {
 }
 
 class FeedbackWidgetAudioViewModel extends BaseViewModel {
+  final String api = '$apiUrl/files?path=';
   final String audio;
   final _player = FlutterSoundPlayer();
   bool _playerIsInited = false;
@@ -56,16 +58,19 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
     if (!_player.isPlaying) {
       _player.setSpeed(1.0);
       await _player.startPlayer(
-        fromURI: audio,
+        fromURI: api + audio,
         codec: Codec.aacMP4,
       );
     }
   }
 
   Future<void> playWithSlowMo() async {
-    _player.setSpeed(0.4);
+    if (!_playerIsInited) {
+      initPlayer();
+    }
+    _player.setSpeed(0.6);
     await _player.startPlayer(
-      fromURI: audio,
+      fromURI: api + audio,
       codec: Codec.aacMP4,
     );
   }
