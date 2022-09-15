@@ -21,9 +21,11 @@ class FeedbackWidgetAudio extends StatelessWidget {
           style: TextButton.styleFrom(
             foregroundColor: Colors.black,
           ),
-          onPressed: () {
-            model.play();
-          },
+          onPressed: model.isShow
+              ? () {
+                  model.play();
+                }
+              : null,
           child: Column(
             children: const [
               ImageIcon(
@@ -43,6 +45,7 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
   final String api = '$apiUrl/files?path=';
   final String audio;
   final _player = FlutterSoundPlayer();
+  bool isShow = true;
   bool _playerIsInited = false;
   FeedbackWidgetAudioViewModel({required this.audio});
 
@@ -57,11 +60,25 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
     }
     if (!_player.isPlaying) {
       _player.setSpeed(1.0);
+      setIsShowFalse();
       await _player.startPlayer(
         fromURI: api + audio,
         codec: Codec.aacMP4,
+        whenFinished: () {
+          setIsShowTrue();
+        },
       );
     }
+  }
+
+  void setIsShowFalse() {
+    isShow = false;
+    notifyListeners();
+  }
+
+  void setIsShowTrue() {
+    isShow = true;
+    notifyListeners();
   }
 
   Future<void> playWithSlowMo() async {
@@ -69,9 +86,13 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
       initPlayer();
     }
     _player.setSpeed(0.6);
+    setIsShowFalse();
     await _player.startPlayer(
       fromURI: api + audio,
       codec: Codec.aacMP4,
+      whenFinished: () {
+        setIsShowTrue();
+      },
     );
   }
 }
