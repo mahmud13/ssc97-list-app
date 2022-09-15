@@ -68,7 +68,7 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
     if (!_playerIsInited) {
       initPlayer();
     }
-    _player.setSpeed(0.4);
+    _player.setSpeed(0.6);
     await _player.startPlayer(
       fromURI: api + audio,
       codec: Codec.aacMP4,
