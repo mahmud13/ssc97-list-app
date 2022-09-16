@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +13,29 @@ class FeedbackWidget extends ViewModelWidget<PracticeViewModel> {
   Widget build(BuildContext context, PracticeViewModel viewModel) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.memory(base64Decode(viewModel.currentAnswer!.feedback.arabic)),
+        // Image.memory(base64Decode(viewModel.currentAnswer!.feedback.arabic)),
+        RichText(
+          softWrap: true,
+          textWidthBasis: TextWidthBasis.longestLine,
+          text: TextSpan(children: [
+            for (var l in viewModel.currentAnswer!.feedback.arabic)
+              TextSpan(
+                text: l.letter,
+                style: TextStyle(
+                  color: Color(l.colorCode),
+                  fontSize: 48,
+                  fontFamily: "uthmanic",
+                ),
+              ),
+          ]),
+        ),
         // RichText(
         //   softWrap: true,
         //   textWidthBasis: TextWidthBasis.longestLine,
         //   text: TextSpan(children: [
-        //     for (var l in viewModel.currentAnswer!.feedback.arabic)
+        //     for (var l in viewModel.currentAnswer!.feedback.transliteration)
         //       TextSpan(
         //         text: l.letter,
         //         style: TextStyle(
@@ -31,20 +46,9 @@ class FeedbackWidget extends ViewModelWidget<PracticeViewModel> {
         //       ),
         //   ]),
         // ),
-        RichText(
-          softWrap: true,
-          textWidthBasis: TextWidthBasis.longestLine,
-          text: TextSpan(children: [
-            for (var l in viewModel.currentAnswer!.feedback.transliteration)
-              TextSpan(
-                text: l.letter,
-                style: TextStyle(
-                  color: Color(l.colorCode),
-                  fontSize: 48,
-                  fontFamily: "uthmanic",
-                ),
-              ),
-          ]),
+        Text(
+          viewModel.currentWord!.transliteration,
+          style: const TextStyle(fontSize: 30),
         ),
         verticalSpaceMedium,
         const Text('Practice Correct form using the options below'),

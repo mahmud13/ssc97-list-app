@@ -13,28 +13,25 @@ class FeedbackWidgetAudio extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<FeedbackWidgetAudioViewModel>.reactive(
       viewModelBuilder: () => FeedbackWidgetAudioViewModel(audio: audio),
-      builder: (context, model, child) => GestureDetector(
-        onDoubleTap: () {
-          model.playWithSlowMo();
-        },
-        child: TextButton(
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.black,
-          ),
-          onPressed: model.isShow
-              ? () {
-                  model.play();
-                }
-              : null,
-          child: Column(
-            children: const [
-              ImageIcon(
-                AssetImage('assets/icons/hear.png'),
-                size: 40,
-              ),
-              Text('Hear')
-            ],
-          ),
+      builder: (context, model, child) => TextButton(
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.black,
+        ),
+        onPressed: model._player.isPlaying
+            ? null
+            : () {
+                model.play();
+              },
+        child: Column(
+          children: [
+            model._player.isPlaying
+                ? const CircularProgressIndicator()
+                : const ImageIcon(
+                    AssetImage('assets/icons/hear.png'),
+                    size: 40,
+                  ),
+            const Text('Hear')
+          ],
         ),
       ),
     );
@@ -45,8 +42,8 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
   final String api = '$apiUrl/files?path=';
   final String audio;
   final _player = FlutterSoundPlayer();
-  bool isShow = true;
   bool _playerIsInited = false;
+  bool _shouldPlaySlow = false;
   FeedbackWidgetAudioViewModel({required this.audio});
 
   Future<void> initPlayer() async {
@@ -59,40 +56,15 @@ class FeedbackWidgetAudioViewModel extends BaseViewModel {
       initPlayer();
     }
     if (!_player.isPlaying) {
-      _player.setSpeed(1.0);
-      setIsShowFalse();
+      _player.setSpeed(_shouldPlaySlow ? 0.6 : 1);
+      _shouldPlaySlow = !_shouldPlaySlow;
       await _player.startPlayer(
-        fromURI: api + audio,
-        codec: Codec.aacMP4,
-        whenFinished: () {
-          setIsShowTrue();
-        },
-      );
+          fromURI: api + audio,
+          codec: Codec.pcm16WAV,
+          whenFinished: () {
+            notifyListeners();
+          });
     }
-  }
-
-  void setIsShowFalse() {
-    isShow = false;
     notifyListeners();
-  }
-
-  void setIsShowTrue() {
-    isShow = true;
-    notifyListeners();
-  }
-
-  Future<void> playWithSlowMo() async {
-    if (!_playerIsInited) {
-      initPlayer();
-    }
-    _player.setSpeed(0.6);
-    setIsShowFalse();
-    await _player.startPlayer(
-      fromURI: api + audio,
-      codec: Codec.aacMP4,
-      whenFinished: () {
-        setIsShowTrue();
-      },
-    );
   }
 }

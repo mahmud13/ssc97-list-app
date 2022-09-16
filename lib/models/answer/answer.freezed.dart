@@ -176,7 +176,7 @@ WordFeedback _$WordFeedbackFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WordFeedback {
-  String get arabic => throw _privateConstructorUsedError;
+  List<LetterAccuracy> get arabic => throw _privateConstructorUsedError;
   List<LetterAccuracy> get transliteration =>
       throw _privateConstructorUsedError;
 
@@ -191,7 +191,8 @@ abstract class $WordFeedbackCopyWith<$Res> {
   factory $WordFeedbackCopyWith(
           WordFeedback value, $Res Function(WordFeedback) then) =
       _$WordFeedbackCopyWithImpl<$Res>;
-  $Res call({String arabic, List<LetterAccuracy> transliteration});
+  $Res call(
+      {List<LetterAccuracy> arabic, List<LetterAccuracy> transliteration});
 }
 
 /// @nodoc
@@ -211,7 +212,7 @@ class _$WordFeedbackCopyWithImpl<$Res> implements $WordFeedbackCopyWith<$Res> {
       arabic: arabic == freezed
           ? _value.arabic
           : arabic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<LetterAccuracy>,
       transliteration: transliteration == freezed
           ? _value.transliteration
           : transliteration // ignore: cast_nullable_to_non_nullable
@@ -227,7 +228,8 @@ abstract class _$$_WordFeedbackCopyWith<$Res>
           _$_WordFeedback value, $Res Function(_$_WordFeedback) then) =
       __$$_WordFeedbackCopyWithImpl<$Res>;
   @override
-  $Res call({String arabic, List<LetterAccuracy> transliteration});
+  $Res call(
+      {List<LetterAccuracy> arabic, List<LetterAccuracy> transliteration});
 }
 
 /// @nodoc
@@ -248,9 +250,9 @@ class __$$_WordFeedbackCopyWithImpl<$Res>
   }) {
     return _then(_$_WordFeedback(
       arabic: arabic == freezed
-          ? _value.arabic
+          ? _value._arabic
           : arabic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<LetterAccuracy>,
       transliteration: transliteration == freezed
           ? _value._transliteration
           : transliteration // ignore: cast_nullable_to_non_nullable
@@ -263,16 +265,22 @@ class __$$_WordFeedbackCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_WordFeedback extends _WordFeedback {
   _$_WordFeedback(
-      {required this.arabic,
+      {required final List<LetterAccuracy> arabic,
       required final List<LetterAccuracy> transliteration})
-      : _transliteration = transliteration,
+      : _arabic = arabic,
+        _transliteration = transliteration,
         super._();
 
   factory _$_WordFeedback.fromJson(Map<String, dynamic> json) =>
       _$$_WordFeedbackFromJson(json);
 
+  final List<LetterAccuracy> _arabic;
   @override
-  final String arabic;
+  List<LetterAccuracy> get arabic {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_arabic);
+  }
+
   final List<LetterAccuracy> _transliteration;
   @override
   List<LetterAccuracy> get transliteration {
@@ -290,7 +298,7 @@ class _$_WordFeedback extends _WordFeedback {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_WordFeedback &&
-            const DeepCollectionEquality().equals(other.arabic, arabic) &&
+            const DeepCollectionEquality().equals(other._arabic, _arabic) &&
             const DeepCollectionEquality()
                 .equals(other._transliteration, _transliteration));
   }
@@ -299,7 +307,7 @@ class _$_WordFeedback extends _WordFeedback {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(arabic),
+      const DeepCollectionEquality().hash(_arabic),
       const DeepCollectionEquality().hash(_transliteration));
 
   @JsonKey(ignore: true)
@@ -317,7 +325,7 @@ class _$_WordFeedback extends _WordFeedback {
 
 abstract class _WordFeedback extends WordFeedback {
   factory _WordFeedback(
-      {required final String arabic,
+      {required final List<LetterAccuracy> arabic,
       required final List<LetterAccuracy> transliteration}) = _$_WordFeedback;
   _WordFeedback._() : super._();
 
@@ -325,7 +333,7 @@ abstract class _WordFeedback extends WordFeedback {
       _$_WordFeedback.fromJson;
 
   @override
-  String get arabic;
+  List<LetterAccuracy> get arabic;
   @override
   List<LetterAccuracy> get transliteration;
   @override
