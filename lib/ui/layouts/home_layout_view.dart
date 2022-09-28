@@ -30,27 +30,26 @@ class HomeLayoutView extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/practice.png')),
+                icon: Icon(Icons.description_outlined),
                 label: 'Practice',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/track.png')),
+                icon: Icon(Icons.insert_chart_outlined_outlined),
                 label: 'Track',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/settings.png')),
+                icon: Icon(Icons.settings_outlined),
                 label: 'Settings',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/profile.png')),
+                icon: Icon(Icons.account_circle_outlined),
                 label: 'Profile',
               ),
             ],
           ),
         );
       },
-      viewModelBuilder: () =>
-          HomeLayoutViewModel(),
+      viewModelBuilder: () => HomeLayoutViewModel(),
     );
   }
 }

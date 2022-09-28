@@ -22,8 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "QVoice": MessageLookupByLibrary.simpleMessage("QVoice"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
-        "previous": MessageLookupByLibrary.simpleMessage("Previous"),
-        "tadrib": MessageLookupByLibrary.simpleMessage("Tadrib")
+        "previous": MessageLookupByLibrary.simpleMessage("Previous")
       };
 }

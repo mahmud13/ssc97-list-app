@@ -1,6 +1,6 @@
-
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mgcs_app/ui/views/intro/ui_helpers.dart';
 import 'package:mgcs_app/ui/views/practice/feedback_widget_audio.dart';
 import 'package:mgcs_app/ui/views/practice/practice_view_model.dart';
@@ -16,6 +16,21 @@ class FeedbackWidget extends ViewModelWidget<PracticeViewModel> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Image.memory(base64Decode(viewModel.currentAnswer!.feedback.arabic)),
+        RatingBar.builder(
+          initialRating: viewModel.currentAnswer!.accuracy * 3,
+          ignoreGestures: true,
+          minRating: 1,
+          direction: Axis.horizontal,
+          allowHalfRating: true,
+          itemCount: 3,
+          itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+          itemBuilder: (context, _) => const Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
+          onRatingUpdate: (rating) {},
+        ),
+        verticalSpaceMedium,
         RichText(
           softWrap: true,
           textWidthBasis: TextWidthBasis.longestLine,

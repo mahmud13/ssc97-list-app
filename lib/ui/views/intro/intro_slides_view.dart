@@ -14,7 +14,7 @@ class IntroSlide1 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Welcome to Tadrib',
+            'Welcome to QVoice',
             style: theme.textTheme.headline4,
           ),
           verticalSpaceMedium,
@@ -29,7 +29,7 @@ class IntroSlide1 extends StatelessWidget {
           ),
           verticalSpaceMedium,
           const Text(
-            'Tadrib will help you to perceive and produce the right sounds while speaking.',
+            'QVoice will help you to perceive and produce the right sounds while speaking.',
             textAlign: TextAlign.center,
           )
         ],
@@ -81,7 +81,7 @@ class IntroSlide3 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Tadrib will analyse your Arabic pronunciation to give you a detailed assessment and score.',
+            'QVoice will analyse your Arabic pronunciation to give you a detailed assessment and score.',
             textAlign: TextAlign.center,
           ),
           Text(

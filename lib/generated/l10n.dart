@@ -50,11 +50,11 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Tadrib`
-  String get tadrib {
+  /// `QVoice`
+  String get QVoice {
     return Intl.message(
-      'Tadrib',
-      name: 'tadrib',
+      'QVoice',
+      name: 'QVoice',
       desc: '',
       args: [],
     );
