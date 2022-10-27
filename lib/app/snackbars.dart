@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mgcs_app/app/app.locator.dart';
+import 'package:ssc_97/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 /// The type of snackbar to show

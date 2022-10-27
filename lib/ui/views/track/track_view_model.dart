@@ -1,8 +1,8 @@
-import 'package:mgcs_app/app/app.locator.dart';
-import 'package:mgcs_app/models/user/user.dart';
-import 'package:mgcs_app/services/authentication_service.dart';
+import 'package:ssc_97/app/app.locator.dart';
+import 'package:ssc_97/models/user/user.dart';
+import 'package:ssc_97/services/authentication_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:mgcs_app/app/app.logger.dart';
+import 'package:ssc_97/app/app.logger.dart';
 
 class TrackViewModel extends BaseViewModel {
   final log = getLogger('TrackViewModel');

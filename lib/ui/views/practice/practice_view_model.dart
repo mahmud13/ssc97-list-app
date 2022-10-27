@@ -2,13 +2,13 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'package:mgcs_app/app/app.locator.dart';
-import 'package:mgcs_app/app/http_client.dart';
-import 'package:mgcs_app/models/answer/answer.dart';
-import 'package:mgcs_app/models/api_helpers/api_wrapper.dart';
-import 'package:mgcs_app/models/words/word.dart';
+import 'package:ssc_97/app/app.locator.dart';
+import 'package:ssc_97/app/http_client.dart';
+import 'package:ssc_97/models/answer/answer.dart';
+import 'package:ssc_97/models/api_helpers/api_wrapper.dart';
+import 'package:ssc_97/models/words/word.dart';
 import 'package:stacked/stacked.dart';
-import 'package:mgcs_app/app/app.logger.dart';
+import 'package:ssc_97/app/app.logger.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class PracticeViewModel extends FutureViewModel {

@@ -1,4 +1,4 @@
-package com.mgcs.app.mgcs_app
+package com.mgcs.app.ssc_97
 
 import io.flutter.embedding.android.FlutterActivity
 

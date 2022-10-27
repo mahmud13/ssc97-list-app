@@ -1,10 +1,10 @@
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:mgcs_app/app/http_client.dart';
-import 'package:mgcs_app/models/api_helpers/api_wrapper.dart';
-import 'package:mgcs_app/models/words/word.dart';
+import 'package:ssc_97/app/http_client.dart';
+import 'package:ssc_97/models/api_helpers/api_wrapper.dart';
+import 'package:ssc_97/models/words/word.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
-import 'package:mgcs_app/app/app.logger.dart';
+import 'package:ssc_97/app/app.logger.dart';
 import 'package:flutter_sound_platform_interface/flutter_sound_recorder_platform_interface.dart';
 
 class AnswerViewModel extends FutureViewModel {

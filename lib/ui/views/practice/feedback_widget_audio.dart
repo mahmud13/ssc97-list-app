@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:mgcs_app/config.dart';
+import 'package:ssc_97/config.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedbackWidgetAudio extends StatelessWidget {

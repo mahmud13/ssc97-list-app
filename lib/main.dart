@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:mgcs_app/app/snackbars.dart';
-import 'package:mgcs_app/services/authentication_service.dart';
+import 'package:ssc_97/app/snackbars.dart';
+import 'package:ssc_97/services/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:mgcs_app/generated/l10n.dart';
+import 'package:ssc_97/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'QVoice',
+        title: '97-99 P. Card Checker',
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         theme: ThemeData(
           brightness: Brightness.light,
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         navigatorKey: StackedService.navigatorKey,
@@ -49,22 +49,6 @@ class MyApp extends StatelessWidget {
       );
 
   RouteSettings _guardedSettings(RouteSettings settings) {
-    final authService = locator<AuthenticationService>();
-    final path = settings.name;
-    var signedIn = authService.loggedIn;
-    // if you want a path to always be allowed place before your route guards
-    if (path == Routes.introView || path == Routes.startupView) return settings;
-
-    // auth route guard implementation
-    if (!signedIn && path != Routes.loginView) {
-      return const RouteSettings(name: Routes.loginView);
-    }
-    if (authService.user != null &&
-        authService.user!.wordDifficulty == null &&
-        path == Routes.homeView) {
-      return const RouteSettings(name: Routes.expertiseLevelView);
-    }
-
     // no route guards violated, return the settings for the desired route
     return settings;
   }

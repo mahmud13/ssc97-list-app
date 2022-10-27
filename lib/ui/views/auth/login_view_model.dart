@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:mgcs_app/app/app.locator.dart';
-import 'package:mgcs_app/app/app.logger.dart';
-import 'package:mgcs_app/app/app.router.dart';
-import 'package:mgcs_app/app/snackbars.dart';
-import 'package:mgcs_app/services/authentication_service.dart';
+import 'package:ssc_97/app/app.locator.dart';
+import 'package:ssc_97/app/app.logger.dart';
+import 'package:ssc_97/app/app.router.dart';
+import 'package:ssc_97/app/snackbars.dart';
+import 'package:ssc_97/services/authentication_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

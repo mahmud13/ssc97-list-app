@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:mgcs_app/app/app.locator.dart';
-import 'package:mgcs_app/app/app.router.dart';
-import 'package:mgcs_app/app/localstorage.dart';
+import 'package:ssc_97/app/app.locator.dart';
+import 'package:ssc_97/app/app.router.dart';
 import 'package:stacked/stacked.dart';
-import 'package:mgcs_app/app/app.logger.dart';
+import 'package:ssc_97/app/app.logger.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class StartupViewModel extends BaseViewModel {
@@ -18,7 +17,7 @@ class StartupViewModel extends BaseViewModel {
 
   void onModelReady() {
     log.v('redirecting to home/intro after 3 seconds');
-    Timer(const Duration(seconds: 0), () => redirectToNext());
+    Timer(const Duration(seconds: 1), () => redirectToNext());
   }
 
   void redirectToNext() async {
@@ -27,13 +26,6 @@ class StartupViewModel extends BaseViewModel {
 
     log.v('Checking if first time user');
 
-    var localstorage = await getLocalStorage();
-    if (localstorage.getBool('introShown') == true) {
-      log.v('Already show, redirecting to home');
-      _navigationService.replaceWith(Routes.homeView);
-    } else {
-      log.v('New comer, showing intro screen');
-      _navigationService.replaceWith(Routes.introView);
-    }
+    _navigationService.replaceWith(Routes.homeView);
   }
 }

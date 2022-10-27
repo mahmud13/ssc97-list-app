@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mgcs_app/ui/views/expertise_level/expertise_level_view_model.dart';
-import 'package:mgcs_app/ui/views/intro/ui_helpers.dart';
+import 'package:ssc_97/ui/views/expertise_level/expertise_level_view_model.dart';
+import 'package:ssc_97/ui/views/intro/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 
 class ExpertiseLevelView extends StatelessWidget {

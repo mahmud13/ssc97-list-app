@@ -1,12 +1,14 @@
-import 'package:mgcs_app/app/app.locator.dart';
-import 'package:mgcs_app/app/app.logger.dart';
-import 'package:mgcs_app/app/http_client.dart';
-import 'package:mgcs_app/app/localstorage.dart';
-import 'package:mgcs_app/config.dart' as config;
-import 'package:mgcs_app/models/api_helpers/api_wrapper.dart';
-import 'package:mgcs_app/models/auth/login_response.dart';
-import 'package:mgcs_app/models/user/user.dart';
-import 'package:mgcs_app/models/words/word.dart';
+import 'dart:convert';
+
+import 'package:ssc_97/app/app.locator.dart';
+import 'package:ssc_97/app/app.logger.dart';
+import 'package:ssc_97/app/http_client.dart';
+import 'package:ssc_97/app/localstorage.dart';
+import 'package:ssc_97/config.dart' as config;
+import 'package:ssc_97/models/api_helpers/api_wrapper.dart';
+import 'package:ssc_97/models/auth/login_response.dart';
+import 'package:ssc_97/models/user/user.dart';
+import 'package:ssc_97/models/words/word.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dio/dio.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -24,6 +26,10 @@ class AuthenticationService with ReactiveServiceMixin {
   final ReactiveValue<String> _token = ReactiveValue<String>("");
   String get token => _token.value;
   bool get loggedIn => _token.value.isNotEmpty ? true : false;
+  final ReactiveValue<List<User>> _allUsers = ReactiveValue<List<User>>([]);
+  final ReactiveValue<bool> _loading = ReactiveValue<bool>(false);
+  List<User> get allUsers => _allUsers.value;
+  bool get dataLoading => _loading.value;
 
   /// @return [User] user
   final ReactiveValue<User?> _user = ReactiveValue<User?>(null);
@@ -76,6 +82,41 @@ class AuthenticationService with ReactiveServiceMixin {
     log.i('Logged in');
 
     return response;
+  }
+
+  Future<void> syncDataFromGoogleSheet() async {
+    _loading.value = true;
+    var dio = Dio();
+    var localstorage = await getLocalStorage();
+    Response data = await dio.get(
+        "https://script.google.com/macros/s/AKfycbzqyolSskfVpJGsKyryuL5856bRZplj5I5xUe053cj2dhu9YVUsX9dEZScTSodPgchP/exec");
+    localstorage.setString('members', jsonEncode(data.data));
+    var localData = localstorage.getString('members');
+    if (localData != null) {
+      List<dynamic> localJson = jsonDecode(localData);
+      _allUsers.value = localJson.map<User>((e) => User.fromJson(e)).toList();
+    }
+    _loading.value = false;
+  }
+
+  Future<void> getDataFromGoogleSheet() async {
+    _loading.value = true;
+    var dio = Dio();
+    var localstorage = await getLocalStorage();
+    var localData = localstorage.getString('members');
+    if (localData == null) {
+      Response data = await dio.get(
+          "https://script.google.com/macros/s/AKfycbzqyolSskfVpJGsKyryuL5856bRZplj5I5xUe053cj2dhu9YVUsX9dEZScTSodPgchP/exec");
+      localstorage.setString('members', jsonEncode(data.data));
+    }
+    localData = localstorage.getString('members');
+    if (localData != null) {
+      List<dynamic> localJson = jsonDecode(localData);
+      _allUsers.value = localJson.map<User>((e) => User.fromJson(e)).toList();
+    } else {
+      _allUsers.value = [];
+    }
+    _loading.value = false;
   }
 
   /// Fetch the current authenticated user.

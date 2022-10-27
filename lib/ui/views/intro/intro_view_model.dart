@@ -1,8 +1,8 @@
-import 'package:mgcs_app/app/app.locator.dart';
-import 'package:mgcs_app/app/app.router.dart';
-import 'package:mgcs_app/app/localstorage.dart';
+import 'package:ssc_97/app/app.locator.dart';
+import 'package:ssc_97/app/app.router.dart';
+import 'package:ssc_97/app/localstorage.dart';
 import 'package:stacked/stacked.dart';
-import 'package:mgcs_app/app/app.logger.dart';
+import 'package:ssc_97/app/app.logger.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class IntroViewModel extends BaseViewModel {

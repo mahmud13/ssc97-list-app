@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mgcs_app/ui/layouts/home_layout_view.dart';
-import 'package:mgcs_app/ui/views/practice/answer_widget.dart';
-import 'package:mgcs_app/ui/views/practice/practice_view_model.dart';
+import 'package:ssc_97/ui/layouts/home_layout_view.dart';
+import 'package:ssc_97/ui/views/practice/answer_widget.dart';
+import 'package:ssc_97/ui/views/practice/practice_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 import 'dropdown_widget.dart';

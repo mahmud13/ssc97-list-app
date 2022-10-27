@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:mgcs_app/ui/views/auth/login_view_model.dart';
+import 'package:ssc_97/ui/views/auth/login_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginView extends StatelessWidget {

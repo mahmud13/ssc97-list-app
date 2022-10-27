@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
-import 'package:mgcs_app/ui/views/intro/intro_view_model.dart';
+import 'package:ssc_97/ui/views/intro/intro_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 import 'intro_slides_view.dart';

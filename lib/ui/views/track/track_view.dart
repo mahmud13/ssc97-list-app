@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mgcs_app/ui/layouts/home_layout_view.dart';
-import 'package:mgcs_app/ui/views/track/track_view_model.dart';
+import 'package:ssc_97/ui/layouts/home_layout_view.dart';
+import 'package:ssc_97/ui/views/track/track_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class TrackView extends StatelessWidget {

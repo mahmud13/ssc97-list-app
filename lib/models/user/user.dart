@@ -1,19 +1,27 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mgcs_app/models/words/word.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
+
+String _durationFromMilliseconds(dynamic milliseconds) =>
+    milliseconds is String ? milliseconds : milliseconds.toString();
 
 @freezed
 class User with _$User {
   User._();
 
-  @JsonSerializable(fieldRename: FieldRename.snake)
+  @JsonSerializable()
   factory User({
-    required int id,
-    String? email,
+    required int pNumber,
     required String name,
-    String? phone,
-    WordDifficulty? wordDifficulty,
+    @JsonKey(name: 'phone', fromJson: _durationFromMilliseconds)
+        required String phone,
+    String? email,
+    String? bloodGroup,
+    String? location,
+    int? slot,
+    String? sms,
+    String? pCard,
+    String? nrb,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

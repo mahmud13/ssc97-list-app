@@ -1,13 +1,13 @@
-import 'package:mgcs_app/services/authentication_service.dart';
-import 'package:mgcs_app/ui/views/auth/login_view.dart';
-import 'package:mgcs_app/ui/views/expertise_level/expertise_level_view.dart';
-import 'package:mgcs_app/ui/views/home/home_view.dart';
-import 'package:mgcs_app/ui/views/intro/intro_view.dart';
-import 'package:mgcs_app/ui/views/practice/practice_view.dart';
-import 'package:mgcs_app/ui/views/profile/profile_view.dart';
-import 'package:mgcs_app/ui/views/settings/settings_view.dart';
-import 'package:mgcs_app/ui/views/startup/startup_view.dart';
-import 'package:mgcs_app/ui/views/track/track_view.dart';
+import 'package:ssc_97/services/authentication_service.dart';
+import 'package:ssc_97/ui/views/auth/login_view.dart';
+import 'package:ssc_97/ui/views/expertise_level/expertise_level_view.dart';
+import 'package:ssc_97/ui/views/home/home_view.dart';
+import 'package:ssc_97/ui/views/intro/intro_view.dart';
+import 'package:ssc_97/ui/views/practice/practice_view.dart';
+import 'package:ssc_97/ui/views/profile/profile_view.dart';
+import 'package:ssc_97/ui/views/settings/settings_view.dart';
+import 'package:ssc_97/ui/views/startup/startup_view.dart';
+import 'package:ssc_97/ui/views/track/track_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 

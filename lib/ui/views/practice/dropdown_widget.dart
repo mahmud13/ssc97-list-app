@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mgcs_app/models/words/word.dart';
-import 'package:mgcs_app/ui/views/intro/ui_helpers.dart';
-import 'package:mgcs_app/ui/views/practice/practice_view_model.dart';
+import 'package:ssc_97/models/words/word.dart';
+import 'package:ssc_97/ui/views/intro/ui_helpers.dart';
+import 'package:ssc_97/ui/views/practice/practice_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class DropdownWidget extends ViewModelWidget<PracticeViewModel> {

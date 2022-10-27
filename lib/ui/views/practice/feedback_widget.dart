@@ -1,9 +1,9 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:mgcs_app/ui/views/intro/ui_helpers.dart';
-import 'package:mgcs_app/ui/views/practice/feedback_widget_audio.dart';
-import 'package:mgcs_app/ui/views/practice/practice_view_model.dart';
+import 'package:ssc_97/ui/views/intro/ui_helpers.dart';
+import 'package:ssc_97/ui/views/practice/feedback_widget_audio.dart';
+import 'package:ssc_97/ui/views/practice/practice_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedbackWidget extends ViewModelWidget<PracticeViewModel> {

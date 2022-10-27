@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
-import 'package:mgcs_app/app/localstorage.dart';
-import 'package:mgcs_app/config.dart' as config;
-import 'package:mgcs_app/services/authentication_service.dart';
+import 'package:ssc_97/app/localstorage.dart';
+import 'package:ssc_97/config.dart' as config;
+import 'package:ssc_97/services/authentication_service.dart';
 
 Dio getDio() {
   Dio dio = Dio(
