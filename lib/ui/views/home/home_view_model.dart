@@ -1,4 +1,3 @@
-
 import 'package:ssc_97/app/app.locator.dart';
 import 'package:ssc_97/app/app.router.dart';
 import 'package:ssc_97/models/user/user.dart';
@@ -7,7 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'package:ssc_97/app/app.logger.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends FutureViewModel {
+class HomeViewModel extends ReactiveViewModel {
   final log = getLogger('Home');
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthenticationService>();
@@ -15,6 +14,7 @@ class HomeViewModel extends FutureViewModel {
   User? currentUser;
   List<User> get allUsers => _authService.allUsers;
   bool get dataLoading => _authService.dataLoading;
+
   List<User> filteredUsers = [];
 
   HomeViewModel() {
@@ -53,4 +53,7 @@ class HomeViewModel extends FutureViewModel {
     filteredUsers = [];
     setBusy(false);
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_authService];
 }

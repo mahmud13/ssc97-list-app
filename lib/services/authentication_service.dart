@@ -19,7 +19,7 @@ class AuthenticationService with ReactiveServiceMixin {
   final dio = getDio();
 
   AuthenticationService() {
-    listenToReactiveValues([_token]);
+    listenToReactiveValues([_token, _allUsers, _loading]);
   }
 
   /// @return [String] token

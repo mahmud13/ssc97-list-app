@@ -19,6 +19,8 @@ class HomeView extends StatelessWidget {
                 ? const Center(child: CircularProgressIndicator())
                 : ListView(
                     children: [
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12), child: 
+                      Text('Enter Your Card Number'),),
                       Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 12),
@@ -112,6 +114,7 @@ class HomeView extends StatelessWidget {
         );
       },
       viewModelBuilder: () => HomeViewModel(),
+      onModelReady: (model) => model.futureToRun(),
     );
   }
 }
